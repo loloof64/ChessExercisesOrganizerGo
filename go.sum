@@ -81,5 +81,7 @@ golang.org/x/text v0.3.0 h1:g61tztE5qeGQ89tm6NTjjM9VPIm088od1l6aSorWRWg=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
 gopkg.in/AlecAivazis/survey.v1 v1.8.4/go.mod h1:iBNOmqKz/NUbZx3bA+4hAGLRC7fSK7tgtVDT4tB22XA=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
+gopkg.in/freeeve/uci.v1 v1.0.0-20160113194233-2365824b929d h1:S+XIjDIXojfrWs2v9BhkdvIjktYh6XdRZe3LPQTj5/0=
+gopkg.in/freeeve/uci.v1 v1.0.0-20160113194233-2365824b929d/go.mod h1:zpECLMSAZT8pg7PaN5IpZqeC1iV+I4ADkIyudRSN4yg=
 gopkg.in/yaml.v3 v3.0.0-20190709130402-674ba3eaed22 h1:0efs3hwEZhFKsCoP8l6dDB1AZWMgnEl3yWXWRZTOaEA=
 gopkg.in/yaml.v3 v3.0.0-20190709130402-674ba3eaed22/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=

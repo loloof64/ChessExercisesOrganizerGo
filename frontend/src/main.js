@@ -14,6 +14,8 @@ Vue.config.devtools = true;
 
 import Wails from '@wailsapp/runtime';
 
+require('../node_modules/@loloof64/chessboard-component/dist/index');
+
 Wails.Init(() => {
 	new Vue({
 		vuetify: new Vuetify({

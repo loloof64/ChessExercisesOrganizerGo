@@ -27,6 +27,7 @@ module.exports = {
 				limit: limit
 			});
 	},
+	lintOnSave: false,
 	css: cssConfig,
 	configureWebpack: {
 		output: {

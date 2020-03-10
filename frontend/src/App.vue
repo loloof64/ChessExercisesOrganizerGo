@@ -2,15 +2,23 @@
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" clipped fixed app>
       <v-list dense>
-        <v-list-item>
+        <v-list-item @click="newGame()">
           <v-list-item-icon>
-            <v-icon>mdi-view-dashboard</v-icon>
+            <v-icon>mdi-restart</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title>Dashboard</v-list-item-title>
+            <v-list-item-title>New game</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item>
+        <v-list-item @click="toggleSide()">
+          <v-list-item-icon>
+            <v-icon>mdi-arrow-up-down</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Toggle side</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item @click="showSettingsDialog()">
           <v-list-item-icon>
             <v-icon>mdi-settings</v-icon>
           </v-list-item-icon>
@@ -22,30 +30,96 @@
     </v-navigation-drawer>
     <v-app-bar app fixed clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Chess Exercises Organizer</v-toolbar-title>
     </v-app-bar>
+
     <v-content>
       <v-container fluid class="px-0">
         <v-layout justify-center align-center class="px-0">
-          <hello-world></hello-world>
+          <game-page></game-page>
         </v-layout>
+
+        <v-dialog v-model="settingsDialog" persistent max-width="300">
+          <v-card>
+            <v-card-title class="headline">{{settingsDialogTitle}}</v-card-title>
+            <v-btn @click="selectEngine()">{{configureEngineButtonText}}</v-btn>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="settingsDialog = false">{{okButtonText}}</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-container>
     </v-content>
+
+    <v-dialog v-model="errorDialog" persistent max-width="300">
+        <v-card>
+          <v-card-title class="headline">{{errorDialogTitle}}</v-card-title>
+          <v-card-text>{{errorDialogText}}</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="green darken-1" text @click="errorDialog = false">{{okButtonText}}</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
     <v-footer app fixed>
-      <span style="margin-left:1em">&copy; You</span>
+      <span style="margin-left:1em">&copy; Laurent Bernab&eacute;</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-  import HelloWorld from "./components/HelloWorld.vue"
+  import GamePage from "./components/GamePage.vue";
 
   export default {
     data: () => ({
-      drawer: false
+      drawer: false,
+      settingsDialog: false,
+      settingsDialogTitle: 'Settings',
+      configureEngineButtonText: 'Configure UCI engine',
+      errorDialog: false,
+      errorDialogTitle: '',
+      errorDialogText: '',
+      okButtonText: 'Ok',
     }),
+    mounted() {
+      window.backend.UciEngine.SetEnginePathManually('/home/laurent-bernabe/Programmes/Echecs/stockfish-11-linux/stockfish-11-linux/Linux/stockfish_20011801_x64_modern')
+        .then(error => {
+          if (error === '#ConfigEngineErr'){
+            this.errorDialogTitle = 'Could not select this engine';
+            this.errorDialogText = 'Failed to select the engine : have you got the right over it ?';
+            this.errorDialog = true;
+          }
+        })
+    },
+    methods: {
+      newGame: function() {
+        this.drawer = false;
+        const chessBoard = document.querySelector('loloof64-chessboard');
+        chessBoard.newGame();
+      },
+      toggleSide: function() {
+        this.drawer = false;
+        const chessBoard = document.querySelector('loloof64-chessboard');
+        chessBoard.toggleSide();
+      },
+      showSettingsDialog: function() {
+        this.drawer = false;
+        this.settingsDialog = true;
+      },
+      selectEngine: function() {
+        window.backend.UciEngine.Load().then(error => {
+          if (error === '#ConfigEngineErr'){
+            this.errorDialogTitle = 'Could not select this engine';
+            this.errorDialogText = 'Failed to select the engine : have you got the right over it ?';
+            this.errorDialog = true;
+          }
+        });
+      },
+    },
     components: {
-      HelloWorld
+      GamePage,
     },
     props: {
       source: String
