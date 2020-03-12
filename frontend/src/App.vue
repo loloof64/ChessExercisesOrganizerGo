@@ -31,6 +31,8 @@
     <v-app-bar app fixed clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Chess Exercises Organizer</v-toolbar-title>
+      <v-btn icon @click="newGame()"><v-icon>mdi-restart</v-icon></v-btn>
+      <v-btn icon @click="toggleSide()"><v-icon>mdi-arrow-up-down</v-icon></v-btn>
     </v-app-bar>
 
     <v-content>
