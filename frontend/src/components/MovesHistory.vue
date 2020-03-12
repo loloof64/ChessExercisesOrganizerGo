@@ -1,7 +1,7 @@
 <template>
   <v-container class="white indigo--text" id="root" width="400" height="600">
     <v-row>
-      <v-col cols="4" class="d-flex justify-end">Move number</v-col>
+      <v-col cols="4" class="d-flex justify-end">Number</v-col>
       <v-col cols="4" class="d-flex justify-end">White</v-col>
       <v-col cols="4" class="d-flex justify-end">Black</v-col>
     </v-row>
@@ -39,5 +39,6 @@ export default {
 .col {
   border-right: 3px solid black;
   border-bottom: 3px solid black;
+  font-size: 24px;
 }
 </style>
