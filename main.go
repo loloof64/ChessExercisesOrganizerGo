@@ -13,8 +13,8 @@ func main() {
 	css := mewn.String("./frontend/dist/app.css")
 
 	app := wails.CreateApp(&wails.AppConfig{
-		Width:  1024,
-		Height: 768,
+		Width:  1100,
+		Height: 800,
 		Title:  "ChessExercisesOrganizer",
 		JS:     js,
 		CSS:    css,

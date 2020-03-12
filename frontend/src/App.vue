@@ -36,7 +36,7 @@
     <v-content>
       <v-container fluid class="px-0">
         <v-layout justify-center align-center class="px-0">
-          <game-page></game-page>
+          <game-page ref="gameZone"></game-page>
         </v-layout>
 
         <v-dialog v-model="settingsDialog" persistent max-width="300">
@@ -96,8 +96,7 @@
     methods: {
       newGame: function() {
         this.drawer = false;
-        const chessBoard = document.querySelector('loloof64-chessboard');
-        chessBoard.newGame();
+        this.$refs['gameZone'].newGame();
       },
       toggleSide: function() {
         this.drawer = false;
