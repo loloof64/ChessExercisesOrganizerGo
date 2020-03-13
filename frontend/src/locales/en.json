@@ -60,6 +60,10 @@
         "side": {
             "white": "White",
             "black": "Black"
+        },
+        "status": {
+            "started": "New game started.",
+            "stopped": "Current game stopped."
         }
     },
     "history": {

@@ -60,6 +60,10 @@
         "side": {
             "white": "Les Blancs",
             "black": "Les Noirs"
+        },
+        "status": {
+            "started": "Nouvelle partie démarrée.",
+            "stopped": "Partie courante interrompue."
         }
     },
     "history": {

@@ -60,6 +60,10 @@
         "side": {
             "white": "Blancos",
             "black": "Negros"
+        },
+        "status": {
+            "started": "Nueva partida empiezada.",
+            "stopped": "Corriente partida parada."
         }
     },
     "history": {

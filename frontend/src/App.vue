@@ -80,6 +80,7 @@
       },
       doStartNewGame: function() {
         this.$refs['gameZone'].newGame();
+        this.$refs['snackbar'].open(this.$i18n.t('game.status.started'));
       },
       stopGameRequest: function() {
         this.$refs['stopGameConfirmation'].open();
@@ -87,6 +88,7 @@
       doStopGame: function() {
         const chessBoard = document.querySelector('loloof64-chessboard');
         chessBoard.stop();
+        this.$refs['snackbar'].open(this.$i18n.t('game.status.stopped'));
       },
       toggleSide: function() {
         const chessBoard = document.querySelector('loloof64-chessboard');
