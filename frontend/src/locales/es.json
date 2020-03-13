@@ -41,8 +41,12 @@
             }
         },
         "newGame": {
-            "title": "Parar esta partida ?",
+            "title": "Parar este partida ?",
             "text": "Realmente quiere empezar una nuveva partida y parar esta corriente partida ?"
+        },
+        "stopGame": {
+            "title": "Parar este partida ?",
+            "text": "Realmenter quiere parar esta corriente partida ?"
         }
     },
     "game": {

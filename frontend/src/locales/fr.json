@@ -43,6 +43,10 @@
         "newGame": {
             "title": "Quitter la partie ?",
             "text": "Souhaitez-vous vraiment démarrer une nouvelle partie et quitter la partie en cours ?"
+        },
+        "stopGame": {
+            "title": "Quitter la partie ?",
+            "text": "Souhaitez-vous vraiment interrompre la partie en cours ?"
         }
     },
     "game": {

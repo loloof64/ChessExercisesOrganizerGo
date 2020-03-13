@@ -4,7 +4,7 @@
       <v-toolbar-title>{{$t('app.title')}}</v-toolbar-title>
       <ToolbarButton :text="$t('menu.newGame.tooltip')" :action="newGameRequest"><v-icon>mdi-restart</v-icon></ToolbarButton>
       <ToolbarButton :text="$t('menu.toggleSide.tooltip')" :action="toggleSide"><v-icon>mdi-arrow-up-down</v-icon></ToolbarButton>
-      <ToolbarButton :text="$t('menu.stopGame.tooltip')" :action="stopGame"><v-icon>mdi-stop-circle</v-icon></ToolbarButton>
+      <ToolbarButton :text="$t('menu.stopGame.tooltip')" :action="stopGameRequest"><v-icon>mdi-stop-circle</v-icon></ToolbarButton>
       <ToolbarButton :text="$t('menu.settings.tooltip')" :action="showSettingsDialog"><v-icon>mdi-settings</v-icon></ToolbarButton>
     </v-app-bar>
 
@@ -28,6 +28,14 @@
           cancelButton
         >
             <v-card-text>{{$t('modals.newGame.text')}}</v-card-text>
+        </SimpleModalDialog>
+
+        <SimpleModalDialog ref="stopGameConfirmation"
+          :title="$t('modals.stopGame.title')"
+          :confirmAction="doStopGame"
+          cancelButton
+        >
+          <v-card-text>{{$t('modals.stopGame.text')}}</v-card-text>
         </SimpleModalDialog>
 
       </v-container>
@@ -67,7 +75,10 @@
       doStartNewGame: function() {
         this.$refs['gameZone'].newGame();
       },
-      stopGame: function() {
+      stopGameRequest: function() {
+        this.$refs['stopGameConfirmation'].open();
+      },
+      doStopGame: function() {
         const chessBoard = document.querySelector('loloof64-chessboard');
         chessBoard.stop();
       },
