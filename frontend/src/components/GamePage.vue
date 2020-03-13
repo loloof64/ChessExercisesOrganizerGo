@@ -15,9 +15,9 @@
       <v-col>
         <loloof64-chessboard
           size="600"
-          promotion_dialog_title="Select the promotion"
+          :promotion_dialog_title="$t('modals.promotion.title')"
           white_player_human="true"
-          black_player_human="false"
+          black_player_human="true"
           @checkmate="notifyCheckmate"
           @stalemate="notifyStalemate"
           @perpetual_draw="notifyPerpetualDraw"
@@ -122,23 +122,24 @@ export default {
     notifyCheckmate: function(event) {
       const whiteCheckmated = event.detail.whiteTurnBeforeMove;
       this.gameEndStatusMsg =
-        (whiteCheckmated ? "White" : "Black") + " won by checkmate";
+        this.$i18n.t('game.ended.checkmate', {
+          winner: this.$i18n.t(whiteCheckmated ? 'game.side.white' : "game.side.black")});
       this.gameEndStatusSnackbar = true;
     },
     notifyStalemate: function(event) {
-      this.gameEndStatusMsg = "Stalemate";
+      this.gameEndStatusMsg = this.$i18n.t('game.ended.stalemate');
       this.gameEndStatusSnackbar = true;
     },
     notifyPerpetualDraw: function(event) {
-      this.gameEndStatusMsg = "Perpetual draw";
+      this.gameEndStatusMsg =  this.$i18n.t('game.ended.perpetualDraw');
       this.gameEndStatusSnackbar = true;
     },
     notifyMissingMaterialDraw: function(event) {
-      this.gameEndStatusMsg = "Missing material draw";
+      this.gameEndStatusMsg =  this.$i18n.t('game.ended.missingMaterial');
       this.gameEndStatusSnackbar = true;
     },
     notifyFiftyMovesDraw: function(event) {
-      this.gameEndStatusMsg = "Fifty moves draw";
+      this.gameEndStatusMsg =  this.$i18n.t('game.ended.fiftyMovesRule');
       this.gameEndStatusSnackbar = true;
     },
     makeComputerMove: function() {
@@ -146,13 +147,13 @@ export default {
       const currentPosition = board.getCurrentPosition();
       window.backend.UciEngine.PlayPosition(currentPosition).then(bestMove => {
         if (bestMove === "#EngineNotSet") {
-          this.errorDialogTitle = "Could not make then engine play";
-          this.errorDialogText = "You forgot to set up an UCI engine first.";
+          this.errorDialogTitle = this.$i18n.t('modals.engineCouldNotPlay.engineNotSet.title');
+          this.errorDialogText = this.$i18n.t('modals.engineCouldNotPlay.engineNotSet.text');
           this.errorDialog = true;
         } else if (bestMove === "#ComputationError") {
-          this.errorDialogTitle = "Could not make then engine play";
+          this.errorDialogTitle = this.$i18n.t('modals.engineCouldNotPlay.computationError.title');
           this.errorDialogText =
-            "An misc. error has occured : is the given position legal and did you really select an uci engine ?";
+            this.$i18n.t('modals.engineCouldNotPlay.computationError.text');
           this.errorDialog = true;
         } else {
           const moveObject = this.convertMoveStringToObject(bestMove);

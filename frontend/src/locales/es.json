@@ -12,5 +12,52 @@
         "settings": {
             "tooltip": "Acceder a las configuraciones"
         }
+    },
+    "app": {
+        "title": "Clasificador de ejercicios de ajedrez"
+    },
+    "modals": {
+        "global": {
+            "okButton": "De acuerdo"
+        },
+        "settings": {
+            "title": "Configuraciones",
+            "configureEngine": "Elegir el motor UCI",
+            "failedToSetupEngineTitle": "Fracasco de la seleccion del motor",
+            "failedToSetupEngineText": "Fracasco de la seleccion del motor : tienes derechos para el acceso ?"
+        },
+        "promotion": {
+            "title": "Elige la pieza de promocion"
+        },
+        "engineCouldNotPlay": {
+            "engineNotSet": {
+                "title": "Fracasco de la lectura juego del motor",
+                "text": "Olvide eligir el motor UCI"
+            },
+            "computationError": {
+                "title": "Fracasco de la lectura juego del motor",
+                "text": "Una diversa errora ha llegado : la posicion es legal y tambien acaso el eligido motor es un motor UCI ?"
+            }
+        }
+    },
+    "game": {
+        "ended": {
+            "checkmate": "{winner} gana por jaque mate.",
+            "stalemate": "Palmadita.",
+            "perpetualDraw": "Iguales por la repeticion de la position.",
+            "missingMaterial": "Iguales porque no ha suficiente material.",
+            "fiftyMovesRule": "Iguale por la ley de los 50 golpes."
+        },
+        "side": {
+            "white": "Blancos",
+            "black": "Negros"
+        }
+    },
+    "history": {
+        "header": {
+            "moveNumber": "Numero",
+            "whiteSide": "Blancos",
+            "blackSide": "Negros"
+        }
     }
 }

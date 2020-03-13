@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-app-bar app fixed clipped-left>
-      <v-toolbar-title>Chess Exercises Organizer</v-toolbar-title>
+      <v-toolbar-title>{{$t('app.title')}}</v-toolbar-title>
       <ToolbarButton :text="$t('menu.newGame.tooltip')" :action="newGame"><v-icon>mdi-restart</v-icon></ToolbarButton>
       <ToolbarButton :text="$t('menu.toggleSide.tooltip')" :action="toggleSide"><v-icon>mdi-arrow-up-down</v-icon></ToolbarButton>
       <ToolbarButton :text="$t('menu.stopGame.tooltip')" :action="stopGame"><v-icon>mdi-stop-circle</v-icon></ToolbarButton>
@@ -16,11 +16,11 @@
 
         <v-dialog v-model="settingsDialog" persistent max-width="300">
           <v-card>
-            <v-card-title class="headline">{{settingsDialogTitle}}</v-card-title>
-            <v-btn @click="selectEngine()">{{configureEngineButtonText}}</v-btn>
+            <v-card-title class="headline">{{$t('modals.settings.title')}}</v-card-title>
+            <v-btn @click="selectEngine()">{{$t('modals.settings.configureEngine')}}</v-btn>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="settingsDialog = false">{{okButtonText}}</v-btn>
+              <v-btn color="blue darken-1" text @click="settingsDialog = false">{{$t('modals.global.okButton')}}</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -33,13 +33,13 @@
           <v-card-text>{{errorDialogText}}</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="green darken-1" text @click="errorDialog = false">{{okButtonText}}</v-btn>
+            <v-btn color="green darken-1" text @click="errorDialog = false">{{$t('modals.global.okButton')}}</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
 
     <v-footer app fixed>
-      <span style="margin-left:1em">&copy; Laurent Bernab&eacute;</span>
+      <span style="margin-left:1em">&copy; Laurent Bernab&eacute; - 2020</span>
     </v-footer>
   </v-app>
 </template>
@@ -52,20 +52,17 @@
     data: () => ({
       drawer: false,
       settingsDialog: false,
-      settingsDialogTitle: 'Settings',
-      configureEngineButtonText: 'Configure UCI engine',
       errorDialog: false,
       errorDialogTitle: '',
       errorDialogText: '',
-      okButtonText: 'Ok',
     }),
     mounted() {
       this.$i18n.locale = navigator.language.substring(0, 2);
       window.backend.UciEngine.SetEnginePathManually('/home/laurent-bernabe/Programmes/Echecs/stockfish-11-linux/stockfish-11-linux/Linux/stockfish_20011801_x64_modern')
         .then(error => {
           if (error === '#ConfigEngineErr'){
-            this.errorDialogTitle = 'Could not select this engine';
-            this.errorDialogText = 'Failed to select the engine : have you got the right over it ?';
+            this.errorDialogTitle = this.$i18n.t('modals.settings.failedToSetupEngineTitle');
+            this.errorDialogText = this.$i18n.t('modals.settings.failedToSetupEngineText');
             this.errorDialog = true;
           }
         })
@@ -92,8 +89,8 @@
       selectEngine: function() {
         window.backend.UciEngine.Load().then(error => {
           if (error === '#ConfigEngineErr'){
-            this.errorDialogTitle = 'Could not select this engine';
-            this.errorDialogText = 'Failed to select the engine : have you got the right over it ?';
+            this.errorDialogTitle = this.$i18n.t('modals.settings.failedToSetupEngineTitle');
+            this.errorDialogText = this.$i18n.t('modals.settings.failedToSetupEngineText');
             this.errorDialog = true;
           }
         });

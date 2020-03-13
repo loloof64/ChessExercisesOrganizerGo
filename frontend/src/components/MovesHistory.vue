@@ -1,9 +1,9 @@
 <template>
   <v-container class="white indigo--text" id="root" width="400" height="600">
     <v-row>
-      <v-col cols="4" class="d-flex justify-end">Number</v-col>
-      <v-col cols="4" class="d-flex justify-end">White</v-col>
-      <v-col cols="4" class="d-flex justify-end">Black</v-col>
+      <v-col cols="4" class="d-flex justify-end">{{$t('history.header.moveNumber')}}</v-col>
+      <v-col cols="4" class="d-flex justify-end">{{$t('history.header.whiteSide')}}</v-col>
+      <v-col cols="4" class="d-flex justify-end">{{$t('history.header.blackSide')}}</v-col>
     </v-row>
     <v-row v-for="(historyLine, index) in history" :key="historyLine.moveNumber">
       <v-col cols="4" class="d-flex justify-end">{{historyLine.moveNumber}}</v-col>

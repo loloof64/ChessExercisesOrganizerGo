@@ -1,16 +1,63 @@
 {
-  "menu": {
-    "newGame": {
-      "tooltip": "Start a new game"
+    "menu": {
+        "newGame": {
+            "tooltip": "Start a new game"
+        },
+        "toggleSide": {
+            "tooltip": "Reverse the board side"
+        },
+        "stopGame": {
+            "tooltip": "Stop current game"
+        },
+        "settings": {
+            "tooltip": "Access the settings"
+        }
     },
-    "toggleSide": {
-      "tooltip": "Toggle the board side"
+    "app": {
+        "title": "Chess exercises organizer"
     },
-    "stopGame": {
-      "tooltip": "Stop current game"
+    "modals": {
+        "global": {
+            "okButton": "Ok"
+        },
+        "settings": {
+            "title": "Settings",
+            "configureEngine": "Select UCI engine",
+            "failedToSetupEngineTitle": "Could not select this engine",
+            "failedToSetupEngineText": "Failed to select the engine : have you got the access rights for it ?"
+        },
+        "promotion": {
+            "title": "Select the promotion piece"
+        },
+        "engineCouldNotPlay": {
+            "engineNotSet": {
+                "title": "Could not make then engine play",
+                "text": "You forgot to set up an UCI engine first."
+            },
+            "computationError": {
+                "title": "Could not make then engine play",
+                "text": "An misc. error has occured : is the given position legal and did you really select an uci engine ?"
+            }
+        }
     },
-    "settings": {
-      "tooltip": "Access the settings"
+    "game": {
+        "ended": {
+            "checkmate": "{winner} won by checkmate.",
+            "stalemate": "Stalemate.",
+            "perpetualDraw": "Three-fold repetitions draw.",
+            "missingMaterial": "Draw by missing material.",
+            "fiftyMovesRule": "Draw by the 50-moves rule."
+        },
+        "side": {
+            "white": "White",
+            "black": "Black"
+        }
+    },
+    "history": {
+        "header": {
+            "moveNumber": "Number",
+            "whiteSide": "White",
+            "blackSide": "Black"
+        }
     }
-  }
 }

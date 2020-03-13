@@ -4,13 +4,60 @@
             "tooltip": "Démarrer une nouvelle partie"
         },
         "toggleSide": {
-            "tooltip": "Basculer l'échiquier"
+            "tooltip": "Retourner l'échiquier"
         },
         "stopGame": {
             "tooltip": "Interrompre la partie en cours"
         },
         "settings": {
             "tooltip": "Accéder aux paramètres"
+        }
+    },
+    "app": {
+        "title": "Organiseur d'exercices d'échecs"
+    },
+    "modals": {
+        "global": {
+            "okButton": "D'accord"
+        },
+        "settings": {
+            "title": "Paramètres",
+            "configureEngine": "Choisir le moteur UCI",
+            "failedToSetupEngineTitle": "Echec de sélection du moteur",
+            "failedToSetupEngineText": "Echec de sélection du moteur : en possedez-vous les droits d'accès ?"
+        },
+        "promotion": {
+            "title": "Veuillez choisir la pièce de promotion"
+        },
+        "engineCouldNotPlay": {
+            "engineNotSet": {
+                "title": "Echec de lecture du coup du moteur",
+                "text": "Vous devez auparavant choisir un moteur UCI."
+            },
+            "computationError": {
+                "title": "Echec de lecture du coup du moteur",
+                "text": "Erreur diverse : la position est-elle légale et avez-vous réellement chosi un moteur UCI ?"
+            }
+        }
+    },
+    "game": {
+        "ended": {
+            "checkmate": "{winner} a gagné par échec et mat.",
+            "stalemate": "Pat.",
+            "perpetualDraw": "Nulle par la triple répétition de position.",
+            "missingMaterial": "Nulle par insuffisance matérielle.",
+            "fiftyMovesRule": "Nulle par la règle des 50 coups."
+        },
+        "side": {
+            "white": "Les Blancs",
+            "black": "Les Noirs"
+        }
+    },
+    "history": {
+        "header": {
+            "moveNumber": "Numéro",
+            "whiteSide": "Blancs",
+            "blackSide": "Noirs"
         }
     }
 }
