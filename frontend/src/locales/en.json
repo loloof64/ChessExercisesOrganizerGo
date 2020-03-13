@@ -39,6 +39,10 @@
                 "title": "Could not make then engine play",
                 "text": "An misc. error has occured : is the given position legal and did you really select an uci engine ?"
             }
+        },
+        "newGame": {
+            "title": "Quit current game ?",
+            "text": "Do you really want to start a new game and stop this one ?"
         }
     },
     "game": {

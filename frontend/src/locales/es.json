@@ -39,6 +39,10 @@
                 "title": "Fracasco de la lectura juego del motor",
                 "text": "Una diversa errora ha llegado : la posicion es legal y tambien acaso el eligido motor es un motor UCI ?"
             }
+        },
+        "newGame": {
+            "title": "Parar esta partida ?",
+            "text": "Realmente quiere empezar una nuveva partida y parar esta corriente partida ?"
         }
     },
     "game": {

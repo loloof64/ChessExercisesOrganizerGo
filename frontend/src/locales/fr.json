@@ -39,6 +39,10 @@
                 "title": "Echec de lecture du coup du moteur",
                 "text": "Erreur diverse : la position est-elle légale et avez-vous réellement chosi un moteur UCI ?"
             }
+        },
+        "newGame": {
+            "title": "Quitter la partie ?",
+            "text": "Souhaitez-vous vraiment démarrer une nouvelle partie et quitter la partie en cours ?"
         }
     },
     "game": {

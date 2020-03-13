@@ -2,7 +2,7 @@
   <v-app id="inspire">
     <v-app-bar app fixed clipped-left>
       <v-toolbar-title>{{$t('app.title')}}</v-toolbar-title>
-      <ToolbarButton :text="$t('menu.newGame.tooltip')" :action="newGame"><v-icon>mdi-restart</v-icon></ToolbarButton>
+      <ToolbarButton :text="$t('menu.newGame.tooltip')" :action="newGameRequest"><v-icon>mdi-restart</v-icon></ToolbarButton>
       <ToolbarButton :text="$t('menu.toggleSide.tooltip')" :action="toggleSide"><v-icon>mdi-arrow-up-down</v-icon></ToolbarButton>
       <ToolbarButton :text="$t('menu.stopGame.tooltip')" :action="stopGame"><v-icon>mdi-stop-circle</v-icon></ToolbarButton>
       <ToolbarButton :text="$t('menu.settings.tooltip')" :action="showSettingsDialog"><v-icon>mdi-settings</v-icon></ToolbarButton>
@@ -20,6 +20,14 @@
 
         <SimpleModalDialog ref="errorDialog" :title="errorDialogTitle">
             <v-card-text>{{errorDialogText}}</v-card-text>
+        </SimpleModalDialog>
+
+        <SimpleModalDialog ref="newGameConfirmation" 
+          :title="$t('modals.newGame.title')"
+          :confirmAction="doStartNewGame"
+          cancelButton
+        >
+            <v-card-text>{{$t('modals.newGame.text')}}</v-card-text>
         </SimpleModalDialog>
 
       </v-container>
@@ -53,7 +61,10 @@
         })
     },
     methods: {
-      newGame: function() {
+      newGameRequest: function() {
+        this.$refs['newGameConfirmation'].open();
+      },
+      doStartNewGame: function() {
         this.$refs['gameZone'].newGame();
       },
       stopGame: function() {
