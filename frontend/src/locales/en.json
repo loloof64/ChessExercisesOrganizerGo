@@ -1,19 +1,15 @@
 {
   "menu": {
     "newGame": {
-      "caption": "New game",
       "tooltip": "Start a new game"
     },
     "toggleSide": {
-      "caption": "Toggle side",
       "tooltip": "Toggle the board side"
     },
     "stopGame": {
-      "caption": "Stop game",
       "tooltip": "Stop current game"
     },
     "settings": {
-      "caption": "Settings",
       "tooltip": "Access the settings"
     }
   }

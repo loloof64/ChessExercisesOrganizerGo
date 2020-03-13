@@ -1,48 +1,11 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" clipped fixed app>
-      <v-list dense>
-        <v-list-item @click="newGame()">
-          <v-list-item-icon>
-            <v-icon>mdi-restart</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>{{$t('menu.newGame.caption')}}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item @click="toggleSide()">
-          <v-list-item-icon>
-            <v-icon>mdi-arrow-up-down</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>{{$t('menu.toggleSide.caption')}}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item @click="stopGame()">
-          <v-list-item-icon>
-            <v-icon>mdi-stop-circle</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>{{$t('menu.stopGame.caption')}}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item @click="showSettingsDialog()">
-          <v-list-item-icon>
-            <v-icon>mdi-settings</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>{{$t('menu.settings.caption')}}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
     <v-app-bar app fixed clipped-left>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Chess Exercises Organizer</v-toolbar-title>
-      <v-btn icon @click="newGame()"><v-icon>mdi-restart</v-icon></v-btn>
-      <v-btn icon @click="toggleSide()"><v-icon>mdi-arrow-up-down</v-icon></v-btn>
-      <v-btn icon @click="stopGame()"><v-icon>mdi-stop-circle</v-icon></v-btn>
-      <v-btn icon @click="showSettingsDialog()"><v-icon>mdi-settings</v-icon></v-btn>
+      <ToolbarButton :text="$t('menu.newGame.tooltip')" :action="newGame"><v-icon>mdi-restart</v-icon></ToolbarButton>
+      <ToolbarButton :text="$t('menu.toggleSide.tooltip')" :action="toggleSide"><v-icon>mdi-arrow-up-down</v-icon></ToolbarButton>
+      <ToolbarButton :text="$t('menu.stopGame.tooltip')" :action="stopGame"><v-icon>mdi-stop-circle</v-icon></ToolbarButton>
+      <ToolbarButton :text="$t('menu.settings.tooltip')" :action="showSettingsDialog"><v-icon>mdi-settings</v-icon></ToolbarButton>
     </v-app-bar>
 
     <v-content>
@@ -82,7 +45,8 @@
 </template>
 
 <script>
-  import GamePage from "./components/GamePage.vue";
+  import GamePage from "./components/GamePage";
+  import ToolbarButton from './components/ToolbarButton';
 
   export default {
     data: () => ({
@@ -137,6 +101,7 @@
     },
     components: {
       GamePage,
+      ToolbarButton,
     },
     props: {
       source: String

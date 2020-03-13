@@ -1,19 +1,15 @@
 {
     "menu": {
         "newGame": {
-            "caption": "Nueva partida",
             "tooltip": "Empiezar una nueva partida"
         },
         "toggleSide": {
-            "caption": "Volcarse el lado",
             "tooltip": "Volcarse el lado del tablero de ajedrez"
         },
         "stopGame": {
-            "caption": "Terminar la partida",
             "tooltip": "Terminar la corriente partida"
         },
         "settings": {
-            "caption": "Configuraciones",
             "tooltip": "Acceder a las configuraciones"
         }
     }
