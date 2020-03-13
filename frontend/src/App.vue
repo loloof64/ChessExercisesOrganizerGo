@@ -42,6 +42,7 @@
       <v-btn icon @click="newGame()"><v-icon>mdi-restart</v-icon></v-btn>
       <v-btn icon @click="toggleSide()"><v-icon>mdi-arrow-up-down</v-icon></v-btn>
       <v-btn icon @click="stopGame()"><v-icon>mdi-stop-circle</v-icon></v-btn>
+      <v-btn icon @click="showSettingsDialog()"><v-icon>mdi-settings</v-icon></v-btn>
     </v-app-bar>
 
     <v-content>
