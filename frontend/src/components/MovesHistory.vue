@@ -5,15 +5,17 @@
       <v-col cols="4" class="d-flex justify-end">White</v-col>
       <v-col cols="4" class="d-flex justify-end">Black</v-col>
     </v-row>
-    <v-row v-for="historyLine in history" :key="historyLine.moveNumber">
+    <v-row v-for="(historyLine, index) in history" :key="historyLine.moveNumber">
       <v-col cols="4" class="d-flex justify-end">{{historyLine.moveNumber}}</v-col>
       <v-col
         cols="4"
         class="d-flex justify-end"
+        @click="setPosition(index, true)"
       >{{historyLine.white ? historyLine.white.moveFan : ''}}</v-col>
       <v-col
         cols="4"
         class="d-flex justify-end"
+        @click="setPosition(index, false)"
       >{{historyLine.black? historyLine.black.moveFan : ''}}</v-col>
     </v-row>
   </v-container>
@@ -25,6 +27,11 @@ export default {
     history: {
       type: Array,
       default: []
+    }
+  },
+  methods: {
+    setPosition: function(historyIndex, whitePlayer) {
+      this.$emit("position_requested", { historyIndex, whitePlayer });
     }
   }
 };

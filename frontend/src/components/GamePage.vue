@@ -29,7 +29,11 @@
       </v-col>
 
       <v-col>
-        <MovesHistory id="history" :history="orderedHistory"></MovesHistory>
+        <MovesHistory
+          id="history"
+          :history="orderedHistory"
+          @position_requested="setPosition($event)"
+        ></MovesHistory>
       </v-col>
     </v-row>
 
@@ -105,7 +109,7 @@ export default {
   },
   methods: {
     newGame: function() {
-      const boardComponent = document.querySelector('loloof64-chessboard');
+      const boardComponent = document.querySelector("loloof64-chessboard");
       boardComponent.newGame();
 
       this.history = [];
@@ -214,6 +218,18 @@ export default {
       }
 
       this.orderedHistory = update;
+    },
+    setPosition: function(evt) {
+      const whitePlayer = evt.whitePlayer;
+      const historyIndex = evt.historyIndex;
+      const board = document.querySelector("loloof64-chessboard");
+      const historyLine = this.orderedHistory[historyIndex];
+
+      const positionObject = whitePlayer
+        ? historyLine.white
+        : historyLine.black;
+
+      board.setPositionAndLastMove({...positionObject});
     }
   },
   components: {
