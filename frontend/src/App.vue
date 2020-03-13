@@ -14,29 +14,16 @@
           <game-page ref="gameZone"></game-page>
         </v-layout>
 
-        <v-dialog v-model="settingsDialog" persistent max-width="300">
-          <v-card>
-            <v-card-title class="headline">{{$t('modals.settings.title')}}</v-card-title>
-            <v-btn @click="selectEngine()">{{$t('modals.settings.configureEngine')}}</v-btn>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="settingsDialog = false">{{$t('modals.global.okButton')}}</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+        <SimpleModalDialog ref="settingsDialog" :title="$t('modals.settings.title')">
+          <v-btn @click="selectEngine()">{{$t('modals.settings.configureEngine')}}</v-btn>
+        </SimpleModalDialog>
+
+        <SimpleModalDialog ref="errorDialog" :title="errorDialogTitle">
+            <v-card-text>{{errorDialogText}}</v-card-text>
+        </SimpleModalDialog>
+
       </v-container>
     </v-content>
-
-    <v-dialog v-model="errorDialog" persistent max-width="300">
-        <v-card>
-          <v-card-title class="headline">{{errorDialogTitle}}</v-card-title>
-          <v-card-text>{{errorDialogText}}</v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="green darken-1" text @click="errorDialog = false">{{$t('modals.global.okButton')}}</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
 
     <v-footer app fixed>
       <span style="margin-left:1em">&copy; Laurent Bernab&eacute; - 2020</span>
@@ -47,12 +34,10 @@
 <script>
   import GamePage from "./components/GamePage";
   import ToolbarButton from './components/ToolbarButton';
+  import SimpleModalDialog from './components/SimpleModalDialog';
 
   export default {
     data: () => ({
-      drawer: false,
-      settingsDialog: false,
-      errorDialog: false,
       errorDialogTitle: '',
       errorDialogText: '',
     }),
@@ -63,35 +48,31 @@
           if (error === '#ConfigEngineErr'){
             this.errorDialogTitle = this.$i18n.t('modals.settings.failedToSetupEngineTitle');
             this.errorDialogText = this.$i18n.t('modals.settings.failedToSetupEngineText');
-            this.errorDialog = true;
+            this.$refs['errorDialog'].open();
           }
         })
     },
     methods: {
       newGame: function() {
-        this.drawer = false;
         this.$refs['gameZone'].newGame();
       },
       stopGame: function() {
-        this.drawer = false;
         const chessBoard = document.querySelector('loloof64-chessboard');
         chessBoard.stop();
       },
       toggleSide: function() {
-        this.drawer = false;
         const chessBoard = document.querySelector('loloof64-chessboard');
         chessBoard.toggleSide();
       },
       showSettingsDialog: function() {
-        this.drawer = false;
-        this.settingsDialog = true;
+        this.$refs['settingsDialog'].open();
       },
       selectEngine: function() {
         window.backend.UciEngine.Load().then(error => {
           if (error === '#ConfigEngineErr'){
             this.errorDialogTitle = this.$i18n.t('modals.settings.failedToSetupEngineTitle');
             this.errorDialogText = this.$i18n.t('modals.settings.failedToSetupEngineText');
-            this.errorDialog = true;
+            this.$refs['errorDialog'].open();
           }
         });
       },
@@ -99,15 +80,10 @@
     components: {
       GamePage,
       ToolbarButton,
+      SimpleModalDialog,
     },
     props: {
       source: String
     }
   }
 </script>
-
-<style>
-  .logo {
-    width: 16em;
-  }
-</style>

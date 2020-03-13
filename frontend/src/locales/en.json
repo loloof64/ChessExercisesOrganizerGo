@@ -18,7 +18,8 @@
     },
     "modals": {
         "global": {
-            "okButton": "Ok"
+            "okButton": "Ok",
+            "cancelButton": "Cancel"
         },
         "settings": {
             "title": "Settings",
