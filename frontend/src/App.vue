@@ -18,6 +18,14 @@
             <v-list-item-title>Toggle side</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item @click="stopGame()">
+          <v-list-item-icon>
+            <v-icon>mdi-stop-circle</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Stop game</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item @click="showSettingsDialog()">
           <v-list-item-icon>
             <v-icon>mdi-settings</v-icon>
@@ -33,6 +41,7 @@
       <v-toolbar-title>Chess Exercises Organizer</v-toolbar-title>
       <v-btn icon @click="newGame()"><v-icon>mdi-restart</v-icon></v-btn>
       <v-btn icon @click="toggleSide()"><v-icon>mdi-arrow-up-down</v-icon></v-btn>
+      <v-btn icon @click="stopGame()"><v-icon>mdi-stop-circle</v-icon></v-btn>
     </v-app-bar>
 
     <v-content>
@@ -99,6 +108,11 @@
       newGame: function() {
         this.drawer = false;
         this.$refs['gameZone'].newGame();
+      },
+      stopGame: function() {
+        this.drawer = false;
+        const chessBoard = document.querySelector('loloof64-chessboard');
+        chessBoard.stop();
       },
       toggleSide: function() {
         this.drawer = false;
