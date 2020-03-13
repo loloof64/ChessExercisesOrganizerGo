@@ -1,0 +1,20 @@
+{
+    "menu": {
+        "newGame": {
+            "caption": "Nouvelle partie",
+            "tooltip": "Démarrer une nouvelle partie"
+        },
+        "toggleSide": {
+            "caption": "Basculer l'échiquier",
+            "tooltip": "Basculer l'échiquier"
+        },
+        "stopGame": {
+            "caption": "Interrompre",
+            "tooltip": "Interrompre la partie en cours"
+        },
+        "settings": {
+            "caption": "Paramètres",
+            "tooltip": "Accéder aux paramètres"
+        }
+    }
+}

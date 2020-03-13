@@ -13,12 +13,13 @@ Vue.config.productionTip = false;
 Vue.config.devtools = true;
 
 import Wails from '@wailsapp/runtime';
+import i18n from './i18n'
 
 require('../node_modules/@loloof64/chessboard-component/dist/index');
 
 Wails.Init(() => {
 	new Vue({
-		vuetify: new Vuetify({
+        vuetify: new Vuetify({
 			icons: {
 				iconfont: 'mdi'
 			},
@@ -26,6 +27,8 @@ Wails.Init(() => {
 				dark: true
 			}
 		}),
-		render: h => h(App)
-	}).$mount('#app');
+
+        i18n,
+        render: h => h(App)
+    }).$mount('#app');
 });

@@ -10,7 +10,7 @@ if (process.env.NODE_ENV == 'production') {
 }
 
 module.exports = {
-	chainWebpack: config => {
+    chainWebpack: config => {
 		let limit = 9999999999999999;
 		config.module
 			.rule('images')
@@ -27,9 +27,11 @@ module.exports = {
 				limit: limit
 			});
 	},
-	lintOnSave: false,
-	css: cssConfig,
-	configureWebpack: {
+
+    lintOnSave: false,
+    css: cssConfig,
+
+    configureWebpack: {
 		output: {
 			filename: '[name].js'
 		},
@@ -37,7 +39,17 @@ module.exports = {
 			splitChunks: false
 		}
 	},
-	devServer: {
+
+    devServer: {
 		disableHostCheck: true
-	}
+	},
+
+    pluginOptions: {
+      i18n: {
+        locale: 'en',
+        fallbackLocale: 'en',
+        localeDir: 'locales',
+        enableInSFC: false
+      }
+    }
 };

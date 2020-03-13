@@ -7,7 +7,7 @@
             <v-icon>mdi-restart</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title>New game</v-list-item-title>
+            <v-list-item-title>{{$t('menu.newGame.caption')}}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item @click="toggleSide()">
@@ -15,7 +15,7 @@
             <v-icon>mdi-arrow-up-down</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title>Toggle side</v-list-item-title>
+            <v-list-item-title>{{$t('menu.toggleSide.caption')}}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item @click="stopGame()">
@@ -23,7 +23,7 @@
             <v-icon>mdi-stop-circle</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title>Stop game</v-list-item-title>
+            <v-list-item-title>{{$t('menu.stopGame.caption')}}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item @click="showSettingsDialog()">
@@ -31,7 +31,7 @@
             <v-icon>mdi-settings</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title>Settings</v-list-item-title>
+            <v-list-item-title>{{$t('menu.settings.caption')}}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -95,6 +95,7 @@
       okButtonText: 'Ok',
     }),
     mounted() {
+      this.$i18n.locale = navigator.language.substring(0, 2);
       window.backend.UciEngine.SetEnginePathManually('/home/laurent-bernabe/Programmes/Echecs/stockfish-11-linux/stockfish-11-linux/Linux/stockfish_20011801_x64_modern')
         .then(error => {
           if (error === '#ConfigEngineErr'){

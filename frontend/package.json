@@ -1,11 +1,12 @@
 {
   "name": "chess-exercises-organizer",
-  "author": "Laurent Bernabe<laurent.bernabe@gmail.com>",
   "private": true,
+  "author": "Laurent Bernabe<laurent.bernabe@gmail.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
     "@loloof64/chessboard-component": "^0.4.2",
@@ -13,6 +14,7 @@
     "core-js": "^3.6.1",
     "regenerator-runtime": "^0.13.3",
     "vue": "^2.5.22",
+    "vue-i18n": "^8.0.0",
     "vuetify": "^2.0.15"
   },
   "devDependencies": {
@@ -26,6 +28,7 @@
     "eventsource-polyfill": "^0.9.6",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0.2",
+    "vue-cli-plugin-i18n": "~0.6.1",
     "vue-template-compiler": "^2.5.21",
     "webpack-hot-middleware": "^2.24.3"
   },
