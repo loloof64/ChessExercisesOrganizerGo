@@ -76,14 +76,23 @@
     },
     methods: {
       newGameRequest: function() {
-        this.$refs['newGameConfirmation'].open();
+        const chessBoard = document.querySelector('loloof64-chessboard');
+        if (chessBoard.gameIsInProgress()) {
+          this.$refs['newGameConfirmation'].open();
+        }
+        else {
+          this.doStartNewGame();
+        }
       },
       doStartNewGame: function() {
         this.$refs['gameZone'].newGame();
         this.$refs['snackbar'].open(this.$i18n.t('game.status.started'));
       },
       stopGameRequest: function() {
-        this.$refs['stopGameConfirmation'].open();
+        const chessBoard = document.querySelector('loloof64-chessboard');
+        if (chessBoard.gameIsInProgress()) {
+          this.$refs['stopGameConfirmation'].open();
+        }
       },
       doStopGame: function() {
         const chessBoard = document.querySelector('loloof64-chessboard');
