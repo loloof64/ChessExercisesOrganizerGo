@@ -11,7 +11,7 @@
     <v-content>
       <v-container fluid class="px-0">
         <v-layout justify-center align-center class="px-0">
-          <game-page ref="gameZone"></game-page>
+          <game-page ref="gameZone" @snackbar="showSnackbar"></game-page>
         </v-layout>
 
         <SimpleModalDialog ref="settingsDialog" :title="$t('modals.settings.title')">
@@ -38,6 +38,10 @@
           <v-card-text>{{$t('modals.stopGame.text')}}</v-card-text>
         </SimpleModalDialog>
 
+        <SimpleSnackBar ref="snackbar">
+          {{ snackBarMessage }}
+        </SimpleSnackBar>
+
       </v-container>
     </v-content>
 
@@ -51,11 +55,13 @@
   import GamePage from "./components/GamePage";
   import ToolbarButton from './components/ToolbarButton';
   import SimpleModalDialog from './components/SimpleModalDialog';
+  import SimpleSnackBar from './components/SimpleSnackBar';
 
   export default {
     data: () => ({
       errorDialogTitle: '',
       errorDialogText: '',
+      snackBarMessage: '',
     }),
     mounted() {
       this.$i18n.locale = navigator.language.substring(0, 2);
@@ -98,11 +104,15 @@
           }
         });
       },
+      showSnackbar: function(event) {
+        this.$refs['snackbar'].open(event);
+      }
     },
     components: {
       GamePage,
       ToolbarButton,
       SimpleModalDialog,
+      SimpleSnackBar,
     },
     props: {
       source: String

@@ -37,7 +37,6 @@
       </v-col>
     </v-row>
 
-    <v-snackbar v-model="gameEndStatusSnackbar" :timeout="1500">{{ gameEndStatusMsg }}</v-snackbar>
   </v-container>
 </template>
 
@@ -97,8 +96,6 @@ export default {
     return {
       message: " ",
       raised: true,
-      gameEndStatusSnackbar: false,
-      gameEndStatusMsg: "",
       errorDialog: false,
       errorDialogTitle: "",
       errorDialogText: "",
@@ -121,26 +118,26 @@ export default {
     },
     notifyCheckmate: function(event) {
       const whiteCheckmated = event.detail.whiteTurnBeforeMove;
-      this.gameEndStatusMsg =
+      const gameEndStatusMsg =
         this.$i18n.t('game.ended.checkmate', {
           winner: this.$i18n.t(whiteCheckmated ? 'game.side.white' : "game.side.black")});
-      this.gameEndStatusSnackbar = true;
+      this.$emit('snackbar', gameEndStatusMsg);
     },
     notifyStalemate: function(event) {
-      this.gameEndStatusMsg = this.$i18n.t('game.ended.stalemate');
-      this.gameEndStatusSnackbar = true;
+      const gameEndStatusMsg = this.$i18n.t('game.ended.stalemate');
+      this.$emit('snackbar', gameEndStatusMsg);
     },
     notifyPerpetualDraw: function(event) {
-      this.gameEndStatusMsg =  this.$i18n.t('game.ended.perpetualDraw');
-      this.gameEndStatusSnackbar = true;
+      const gameEndStatusMsg =  this.$i18n.t('game.ended.perpetualDraw');
+      this.$emit('snackbar', gameEndStatusMsg);
     },
     notifyMissingMaterialDraw: function(event) {
-      this.gameEndStatusMsg =  this.$i18n.t('game.ended.missingMaterial');
-      this.gameEndStatusSnackbar = true;
+      const gameEndStatusMsg =  this.$i18n.t('game.ended.missingMaterial');
+      this.$emit('snackbar', gameEndStatusMsg);
     },
     notifyFiftyMovesDraw: function(event) {
-      this.gameEndStatusMsg =  this.$i18n.t('game.ended.fiftyMovesRule');
-      this.gameEndStatusSnackbar = true;
+      const gameEndStatusMsg =  this.$i18n.t('game.ended.fiftyMovesRule');
+      this.$emit('snackbar', gameEndStatusMsg);
     },
     makeComputerMove: function() {
       const board = document.querySelector("loloof64-chessboard");
