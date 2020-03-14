@@ -71,6 +71,12 @@
             "moveNumber": "Numéro",
             "whiteSide": "Blancs",
             "blackSide": "Noirs"
+        },
+        "buttons": {
+            "first": "Première position",
+            "previous": "Position précédente",
+            "next": "Position suivante",
+            "last": "Dernière position"
         }
     }
 }
