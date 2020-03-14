@@ -98,6 +98,7 @@
         const chessBoard = document.querySelector('loloof64-chessboard');
         chessBoard.stop();
         this.$refs['snackbar'].open(this.$i18n.t('game.status.stopped'));
+        this.$refs['gameZone'].$refs['history'].selectLastMove()
       },
       toggleSide: function() {
         const chessBoard = document.querySelector('loloof64-chessboard');
