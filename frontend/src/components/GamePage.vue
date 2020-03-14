@@ -109,6 +109,7 @@ export default {
       const boardComponent = document.querySelector("loloof64-chessboard");
       boardComponent.newGame();
 
+      this.$refs['history'].clearSelection();
       this.history = [];
       this.updateOrderedHistory();
     },

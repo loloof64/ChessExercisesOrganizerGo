@@ -104,6 +104,9 @@ export default {
         const whitePlayer =  this.history[historyIndex]['black'] !== undefined ? false : true;
         this.selectedPosition = {whitePlayer, historyIndex};
       }, 100);
+    },
+    clearSelection: function() {
+      this.selectedPosition = undefined;
     }
   },
   components: {
