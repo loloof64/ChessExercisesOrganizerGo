@@ -77,29 +77,31 @@ export default {
       this.$emit("position_requested", { historyIndex, whitePlayer });
     },
     goFirst: function() {
-
+      
     },
     goPrevious: function() {
       if (this.selectedPosition === undefined) return;
+      let newSelectedPosition;
+      
       if (this.selectedPosition.historyIndex === 0 && this.selectedPosition.whitePlayer === true) {
-        this.selectedPosition = undefined;
+        newSelectedPosition = undefined;
       }
       else {
         if (this.selectedPosition.whitePlayer === false) {
           const noWhiteMove = this.history[this.selectedPosition.historyIndex]['white'] === undefined;
           // Did the game started with a black move ?
           if (noWhiteMove) {
-            this.selectedPosition = undefined;
+            newSelectedPosition = undefined;
           }
           else {
-            this.selectedPosition.whitePlayer = true;
+            newSelectedPosition = {...this.selectedPosition, whitePlayer: true};
           }
         }
         else {
-          this.selectedPosition.historyIndex--;
-          this.selectedPosition.whitePlayer = false;
+          newSelectedPosition = {historyIndex: this.selectedPosition.historyIndex - 1, whitePlayer: false};
         }
       }
+      this.$emit("position_requested", newSelectedPosition);
     },
     goNext: function() {
 

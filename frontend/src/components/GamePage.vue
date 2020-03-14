@@ -105,9 +105,9 @@ export default {
     };
   },
   methods: {
-    newGame: function() {
+    newGame: function(startPosition) {
       const boardComponent = document.querySelector("loloof64-chessboard");
-      boardComponent.newGame();
+      boardComponent.newGame(startPosition);
 
       this.$refs['history'].clearSelection();
       this.history = [];
