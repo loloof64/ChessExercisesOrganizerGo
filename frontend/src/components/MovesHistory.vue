@@ -1,6 +1,6 @@
 <template>
   <v-container class="white indigo--text" id="root" width="400" height="600">
-    <v-row class="mx-auto">
+    <v-row class="mx-2">
         <v-col v-for="btn in buttons" :key="btn.tooltipTrKey" cols="3">
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
@@ -21,12 +21,14 @@
         move
         cols="4"
         class="d-flex justify-end"
+        :class="{ highlight: isSelectedPosition(index, true) }"
         @click="setPosition(index, true)"
       >{{historyLine.white ? historyLine.white.moveFan : ''}}</v-col>
       <v-col
         move
         cols="4"
         class="d-flex justify-end"
+        :class="{ highlight: isSelectedPosition(index, false) }"
         @click="setPosition(index, false)"
       >{{historyLine.black? historyLine.black.moveFan : ''}}</v-col>
     </v-row>
@@ -36,6 +38,7 @@
 <script>
 import ToolbarButton from './ToolbarButton';
 export default {
+  name: 'MovesHistory',
   props: {
     history: {
       type: Array,
@@ -65,7 +68,8 @@ export default {
           tooltipTrKey: 'history.buttons.last',
           icon: 'mdi-skip-next'
         },
-      ]
+      ],
+      selectedPosition: undefined,
     };
   },
   methods: {
@@ -83,6 +87,14 @@ export default {
     },
     goLast: function() {
 
+    },
+    confirmPositionSet: function(evt) {
+      this.selectedPosition = evt;
+    },
+    isSelectedPosition: function(index, whitePlayer) {
+      if (this.selectedPosition === undefined) return false;
+      return whitePlayer === this.selectedPosition.whitePlayer &&
+        index === this.selectedPosition.historyIndex;
     }
   },
   components: {
@@ -101,5 +113,10 @@ export default {
   border-right: 3px solid black;
   border-bottom: 3px solid black;
   font-size: 24px;
+}
+
+.highlight {
+  background-color: aqua;
+  color: brown;
 }
 </style>

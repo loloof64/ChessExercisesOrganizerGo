@@ -30,7 +30,7 @@
 
       <v-col>
         <MovesHistory
-          id="history"
+          ref="history"
           :history="orderedHistory"
           @position_requested="setPosition($event)"
         ></MovesHistory>
@@ -227,7 +227,11 @@ export default {
         ? historyLine.white
         : historyLine.black;
 
-      board.setPositionAndLastMove({...positionObject});
+      const success = board.setPositionAndLastMove({...positionObject});
+      if (success) {
+        const historyComponent = this.$refs['history'];
+        historyComponent.confirmPositionSet(evt);
+      }
     }
   },
   components: {
