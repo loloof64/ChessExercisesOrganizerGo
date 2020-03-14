@@ -115,6 +115,11 @@ export default {
     addMoveToHistory: function(event) {
       this.history = [...this.history, event.detail.moveObject];
       this.updateOrderedHistory();
+
+      const boardComponent = document.querySelector('loloof64-chessboard');
+      if ( ! boardComponent.gameIsInProgress() ) {
+        this.$refs['history'].selectLastMove();
+      }
     },
     notifyCheckmate: function(event) {
       const whiteCheckmated = event.detail.whiteTurnBeforeMove;

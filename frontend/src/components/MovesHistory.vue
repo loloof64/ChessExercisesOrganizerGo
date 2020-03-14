@@ -95,6 +95,15 @@ export default {
       if (this.selectedPosition === undefined) return false;
       return whitePlayer === this.selectedPosition.whitePlayer &&
         index === this.selectedPosition.historyIndex;
+    },
+    selectLastMove: function() {
+      // The last history move may not have been produced yet by the board component.
+      // So it is wiser to wait a little.
+      setTimeout(() => {
+        const historyIndex = this.history.length - 1;
+        const whitePlayer =  this.history[historyIndex]['black'] !== undefined ? false : true;
+        this.selectedPosition = {whitePlayer, historyIndex};
+      }, 100);
     }
   },
   components: {
