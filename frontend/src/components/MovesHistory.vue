@@ -80,7 +80,26 @@ export default {
 
     },
     goPrevious: function() {
-
+      if (this.selectedPosition === undefined) return;
+      if (this.selectedPosition.historyIndex === 0 && this.selectedPosition.whitePlayer === true) {
+        this.selectedPosition = undefined;
+      }
+      else {
+        if (this.selectedPosition.whitePlayer === false) {
+          const noWhiteMove = this.history[this.selectedPosition.historyIndex]['white'] === undefined;
+          // Did the game started with a black move ?
+          if (noWhiteMove) {
+            this.selectedPosition = undefined;
+          }
+          else {
+            this.selectedPosition.whitePlayer = true;
+          }
+        }
+        else {
+          this.selectedPosition.historyIndex--;
+          this.selectedPosition.whitePlayer = false;
+        }
+      }
     },
     goNext: function() {
 
