@@ -36,7 +36,6 @@
         ></MovesHistory>
       </v-col>
     </v-row>
-
   </v-container>
 </template>
 
@@ -106,57 +105,66 @@ export default {
   },
   methods: {
     newGame: function(startPosition) {
-      const boardComponent = document.querySelector("loloof64-chessboard");
-      boardComponent.newGame(startPosition);
-
-      this.$refs['history'].clearSelection();
+      this.$refs["history"].clearSelection();
       this.history = [];
       this.updateOrderedHistory();
+
+      const boardComponent = document.querySelector("loloof64-chessboard");
+      boardComponent.newGame(startPosition);
     },
     addMoveToHistory: function(event) {
       this.history = [...this.history, event.detail.moveObject];
       this.updateOrderedHistory();
 
-      const boardComponent = document.querySelector('loloof64-chessboard');
-      if ( ! boardComponent.gameIsInProgress() ) {
-        this.$refs['history'].selectLastMove();
+      const boardComponent = document.querySelector("loloof64-chessboard");
+      if (!boardComponent.gameIsInProgress()) {
+        this.$refs["history"].selectLastMove();
       }
     },
     notifyCheckmate: function(event) {
       const whiteCheckmated = event.detail.whiteTurnBeforeMove;
-      const gameEndStatusMsg =
-        this.$i18n.t('game.ended.checkmate', {
-          winner: this.$i18n.t(whiteCheckmated ? 'game.side.white' : "game.side.black")});
-      this.$emit('snackbar', gameEndStatusMsg);
+      const gameEndStatusMsg = this.$i18n.t("game.ended.checkmate", {
+        winner: this.$i18n.t(
+          whiteCheckmated ? "game.side.white" : "game.side.black"
+        )
+      });
+      this.$emit("snackbar", gameEndStatusMsg);
     },
     notifyStalemate: function(event) {
-      const gameEndStatusMsg = this.$i18n.t('game.ended.stalemate');
-      this.$emit('snackbar', gameEndStatusMsg);
+      const gameEndStatusMsg = this.$i18n.t("game.ended.stalemate");
+      this.$emit("snackbar", gameEndStatusMsg);
     },
     notifyPerpetualDraw: function(event) {
-      const gameEndStatusMsg =  this.$i18n.t('game.ended.perpetualDraw');
-      this.$emit('snackbar', gameEndStatusMsg);
+      const gameEndStatusMsg = this.$i18n.t("game.ended.perpetualDraw");
+      this.$emit("snackbar", gameEndStatusMsg);
     },
     notifyMissingMaterialDraw: function(event) {
-      const gameEndStatusMsg =  this.$i18n.t('game.ended.missingMaterial');
-      this.$emit('snackbar', gameEndStatusMsg);
+      const gameEndStatusMsg = this.$i18n.t("game.ended.missingMaterial");
+      this.$emit("snackbar", gameEndStatusMsg);
     },
     notifyFiftyMovesDraw: function(event) {
-      const gameEndStatusMsg =  this.$i18n.t('game.ended.fiftyMovesRule');
-      this.$emit('snackbar', gameEndStatusMsg);
+      const gameEndStatusMsg = this.$i18n.t("game.ended.fiftyMovesRule");
+      this.$emit("snackbar", gameEndStatusMsg);
     },
     makeComputerMove: function() {
       const board = document.querySelector("loloof64-chessboard");
       const currentPosition = board.getCurrentPosition();
       window.backend.UciEngine.PlayPosition(currentPosition).then(bestMove => {
         if (bestMove === "#EngineNotSet") {
-          this.errorDialogTitle = this.$i18n.t('modals.engineCouldNotPlay.engineNotSet.title');
-          this.errorDialogText = this.$i18n.t('modals.engineCouldNotPlay.engineNotSet.text');
+          this.errorDialogTitle = this.$i18n.t(
+            "modals.engineCouldNotPlay.engineNotSet.title"
+          );
+          this.errorDialogText = this.$i18n.t(
+            "modals.engineCouldNotPlay.engineNotSet.text"
+          );
           this.errorDialog = true;
         } else if (bestMove === "#ComputationError") {
-          this.errorDialogTitle = this.$i18n.t('modals.engineCouldNotPlay.computationError.title');
-          this.errorDialogText =
-            this.$i18n.t('modals.engineCouldNotPlay.computationError.text');
+          this.errorDialogTitle = this.$i18n.t(
+            "modals.engineCouldNotPlay.computationError.title"
+          );
+          this.errorDialogText = this.$i18n.t(
+            "modals.engineCouldNotPlay.computationError.text"
+          );
           this.errorDialog = true;
         } else {
           const moveObject = this.convertMoveStringToObject(bestMove);
@@ -224,18 +232,28 @@ export default {
       this.orderedHistory = update;
     },
     setPosition: function(evt) {
-      const whitePlayer = evt.whitePlayer;
-      const historyIndex = evt.historyIndex;
       const board = document.querySelector("loloof64-chessboard");
-      const historyLine = this.orderedHistory[historyIndex];
+      let success;
 
-      const positionObject = whitePlayer
-        ? historyLine.white
-        : historyLine.black;
+      if (evt !== undefined) {
+        const whitePlayer = evt.whitePlayer;
+        const historyIndex = evt.historyIndex;
 
-      const success = board.setPositionAndLastMove({...positionObject});
+        const historyLine = this.orderedHistory[historyIndex];
+
+        let positionObject = whitePlayer
+          ? historyLine.white
+          : historyLine.black;
+
+        success = board.setPositionAndLastMove({ ...positionObject });
+      }
+
+      else {
+        success = board.setPositionAndLastMove();
+      }
+
       if (success) {
-        const historyComponent = this.$refs['history'];
+        const historyComponent = this.$refs["history"];
         historyComponent.confirmPositionSet(evt);
       }
     }
