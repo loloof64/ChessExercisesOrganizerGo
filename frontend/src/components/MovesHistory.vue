@@ -74,10 +74,16 @@ export default {
   },
   methods: {
     setPosition: function(historyIndex, whitePlayer) {
-      this.$emit("position_requested", { historyIndex, whitePlayer });
+      let valueToEmit;
+      const matchingHistoryLine = this.history[historyIndex];
+      if (matchingHistoryLine) {
+        const isDefined = whitePlayer ? matchingHistoryLine['white'] : matchingHistoryLine['black'];
+        if (isDefined) valueToEmit = { historyIndex, whitePlayer };
+      }
+      this.$emit("position_requested", valueToEmit);
     },
     goFirst: function() {
-      
+      this.$emit("position_requested", undefined);
     },
     goPrevious: function() {
       if (this.selectedPosition === undefined) return;
@@ -87,8 +93,8 @@ export default {
         newSelectedPosition = undefined;
       }
       else {
-        // Do we need to go previous line ?
-        if (this.selectedPosition.whitePlayer === false) {
+        const weGoIntoPreviousLine = this.selectedPosition.whitePlayer === false;
+        if (weGoIntoPreviousLine) {
           const noWhiteMove = this.history[this.selectedPosition.historyIndex]['white'] === undefined;
           // Did the game started with a black move ?
           if (noWhiteMove) {
