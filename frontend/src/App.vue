@@ -85,7 +85,7 @@
         }
       },
       doStartNewGame: function() {
-        this.$refs['gameZone'].newGame('8/8/8/8/3kp3/8/8/4K3 b - - 0 36');
+        this.$refs['gameZone'].newGame();
         this.$refs['snackbar'].open(this.$i18n.t('game.status.started'));
       },
       stopGameRequest: function() {

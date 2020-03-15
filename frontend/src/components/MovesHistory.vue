@@ -111,7 +111,36 @@ export default {
       this.$emit("position_requested", newSelectedPosition);
     },
     goNext: function() {
+      const firstMoveLineIndex = this.history.findIndex(curr => curr.white || curr.black);
+      const firstMoveLine = this.history[firstMoveLineIndex];
+      const whitePlayer = firstMoveLine.white !== undefined;
 
+      let newSelectedPosition;
+
+      if (this.selectedPosition === undefined) {
+        newSelectedPosition = {historyIndex: firstMoveLineIndex, whitePlayer};
+      }
+      else {
+        let alreadyOnLastMove = false;
+        const lastMoveLine = this.history.length > 0 ? this.history[this.history.length - 1] : undefined;
+        const weAreOnLastLine = this.selectedPosition.historyIndex === this.history.length - 1;
+
+       if (weAreOnLastLine) {
+         if (lastMoveLine.black !== undefined) alreadyOnLastMove = this.selectedPosition.whitePlayer === false;
+         else alreadyOnLastMove = true;
+       }
+        if ( ! alreadyOnLastMove ) {
+          const weGoIntoNextLine = this.selectedPosition.whitePlayer === false;
+          if (weGoIntoNextLine) {
+            newSelectedPosition = {historyIndex: this.selectedPosition.historyIndex + 1, whitePlayer: true};
+          }
+          else {
+            newSelectedPosition = {...this.selectedPosition, whitePlayer: false};
+          }
+        }
+        else return;
+      }
+      this.$emit("position_requested", newSelectedPosition);
     },
     goLast: function() {
 
