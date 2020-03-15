@@ -87,6 +87,7 @@ export default {
         newSelectedPosition = undefined;
       }
       else {
+        // Do we need to go previous line ?
         if (this.selectedPosition.whitePlayer === false) {
           const noWhiteMove = this.history[this.selectedPosition.historyIndex]['white'] === undefined;
           // Did the game started with a black move ?

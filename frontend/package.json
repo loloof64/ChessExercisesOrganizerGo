@@ -9,7 +9,7 @@
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
-    "@loloof64/chessboard-component": "^0.8.4",
+    "@loloof64/chessboard-component": "^0.8.6",
     "@wailsapp/runtime": "^1.0.0",
     "core-js": "^3.6.1",
     "regenerator-runtime": "^0.13.3",
