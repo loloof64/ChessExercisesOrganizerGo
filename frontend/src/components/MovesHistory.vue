@@ -111,6 +111,8 @@ export default {
       this.$emit("position_requested", newSelectedPosition);
     },
     goNext: function() {
+      if (this.history.length === 0) return;
+
       const firstMoveLineIndex = this.history.findIndex(curr => curr.white || curr.black);
       const firstMoveLine = this.history[firstMoveLineIndex];
       const whitePlayer = firstMoveLine.white !== undefined;
@@ -143,7 +145,14 @@ export default {
       this.$emit("position_requested", newSelectedPosition);
     },
     goLast: function() {
+      if (this.history.length === 0) return;
 
+      const lastHistoryLineIndex = this.history.length - 1;
+      const lastHistoryLine = this.history[lastHistoryLineIndex];
+      const newSelectedPosition = {historyIndex: lastHistoryLineIndex, 
+        whitePlayer: lastHistoryLine.black === undefined};
+
+      this.$emit("position_requested", newSelectedPosition);
     },
     confirmPositionSet: function(evt) {
       this.selectedPosition = evt;
@@ -154,6 +163,7 @@ export default {
         index === this.selectedPosition.historyIndex;
     },
     selectLastMove: function() {
+      if (this.history.length === 0) return;
       // The last history move may not have been produced yet by the board component.
       // So it is wiser to wait a little.
       setTimeout(() => {
