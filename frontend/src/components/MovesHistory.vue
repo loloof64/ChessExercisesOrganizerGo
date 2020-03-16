@@ -83,7 +83,10 @@ export default {
       this.$emit("position_requested", valueToEmit);
     },
     goFirst: function() {
-      this.$emit("position_requested", undefined);
+      // We don't process it if no history is defined
+      if (this.history.length > 0) {
+        this.$emit("position_requested", undefined);
+      }
     },
     goPrevious: function() {
       if (this.selectedPosition === undefined) return;
