@@ -9,6 +9,9 @@
         "stopGame": {
             "tooltip": "Stop current game"
         },
+        "save": {
+            "tooltip": "Save current game"
+        },
         "settings": {
             "tooltip": "Access the settings"
         }
@@ -55,6 +58,18 @@
         "invalidPgn": {
             "title": "Error reading PGN",
             "text": "The given PGN is not valid"
+        },
+        "saveSuccess": {
+            "title": "Game saved",
+            "text": "Game saved with success"
+        },
+        "saveError": {
+            "title": "Save error",
+            "text": "Error saving game"
+        },
+        "saveClosingError": {
+            "title": "Error closing file",
+            "text": "Failed to close file"
         }
     },
     "game": {

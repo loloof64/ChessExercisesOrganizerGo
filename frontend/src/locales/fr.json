@@ -9,6 +9,9 @@
         "stopGame": {
             "tooltip": "Interrompre la partie en cours"
         },
+        "save": {
+            "tooltip": "Sauvegardie la partie"
+        },
         "settings": {
             "tooltip": "Accéder aux paramètres"
         }
@@ -55,6 +58,18 @@
         "invalidPgn": {
             "title": "Erreur de lecture du PGN",
             "text": "Le PGN est incorrect"
+        },
+        "saveSuccess": {
+            "title": "Partie sauvegardée",
+            "text": "Succès de sauvegarde de la partie"
+        },
+        "saveError": {
+            "title": "Erreur de sauvegarde",
+            "text": "Erreur de sauvegarde de la partie"
+        },
+        "saveClosingError": {
+            "title": "Erreur de fermeture du fichier",
+            "text": "Erreur de fermeture du fichier"
         }
     },
     "game": {

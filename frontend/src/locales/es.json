@@ -9,6 +9,9 @@
         "stopGame": {
             "tooltip": "Terminar la corriente partida"
         },
+        "save": {
+            "tooltip": "Salvaguardar la corriente partida"
+        },
         "settings": {
             "tooltip": "Acceder a las configuraciones"
         }
@@ -55,6 +58,18 @@
         "invalidPgn": {
             "title": "Error leerando al PGN",
             "text": "The PGN es no valido"
+        },
+        "saveSuccess": {
+            "title": "Salvaguardado la partida",
+            "text": "Salvaguardado la partida"
+        },
+        "saveError": {
+            "title": "Error salvaguardando la partida",
+            "text": "Error salvaguardando la partida"
+        },
+        "saveClosingError": {
+            "title": "Error cerrando el archivo",
+            "text": "Error cerrando el archivo"
         }
     },
     "game": {

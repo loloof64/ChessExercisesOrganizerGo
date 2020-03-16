@@ -5,6 +5,7 @@
       <ToolbarButton :text="$t('menu.newGame.tooltip')" :action="newGameRequest" :darkMode="false"><v-icon>mdi-restart</v-icon></ToolbarButton>
       <ToolbarButton :text="$t('menu.toggleSide.tooltip')" :action="toggleSide"><v-icon>mdi-arrow-up-down</v-icon></ToolbarButton>
       <ToolbarButton :text="$t('menu.stopGame.tooltip')" :action="stopGameRequest"><v-icon>mdi-stop-circle</v-icon></ToolbarButton>
+      <ToolbarButton :text="$t('menu.save.tooltip')" :action="showSaveDialog"><v-icon>mdi-content-save</v-icon></ToolbarButton>
       <ToolbarButton :text="$t('menu.settings.tooltip')" :action="showSettingsDialog"><v-icon>mdi-settings</v-icon></ToolbarButton>
     </v-app-bar>
 
@@ -20,6 +21,10 @@
 
         <SimpleModalDialog ref="errorDialog" :title="errorDialogTitle">
             <v-card-text>{{errorDialogText}}</v-card-text>
+        </SimpleModalDialog>
+
+        <SimpleModalDialog ref="saveSuccessfulDialog" :title="$t('modals.saveSuccess.title')">
+            <v-card-text>{{$t('modals.saveSuccess.text')}}</v-card-text>
         </SimpleModalDialog>
 
         <SimpleModalDialog ref="newGameConfirmation" 
@@ -91,7 +96,7 @@
       doStartNewGame: function() {
         const fileName = 'PgnViergeAvecNoirs';
         const filePath = '/home/laurent-bernabe/Documents/temp/pgn/' + fileName + '.pgn';
-        window.backend.TextLoader.GetTextFileContentManually(filePath)
+        window.backend.TextFileManager.GetTextFileContentManually(filePath)
         .then(content => {
           if (content === '#ErrorReadingFile') {
             this.errorDialogTitle = this.$i18n.t('modals.failedToReadPgn.title');
@@ -152,7 +157,37 @@
       },
       showSnackbar: function(event) {
         this.$refs['snackbar'].open(event);
-      }
+      },
+      showSaveDialog: function() {
+        const chessBoard = document.querySelector('loloof64-chessboard');
+        if (chessBoard.gameIsInProgress()) return;
+
+
+        const historyComponent = this.$refs['gameZone'].$refs['history'];
+        if (!historyComponent.hasData()) return;
+
+        const pgn = chessBoard.gamePgn();
+        const fileName = 'PgnGenere';
+        const filePath = '/home/laurent-bernabe/Documents/temp/pgn/' + fileName + '.pgn';
+
+        window.backend.TextFileManager.SaveTextFileManually(filePath, pgn).then(error => {
+          if (error === '#ErrorSavingFile')
+          {
+            this.errorDialogTitle = this.$i18n.t('modals.saveError.title');
+            this.errorDialogText = this.$i18n.t('modals.saveError.text');
+            this.$refs['errorDialog'].open();
+          }
+          else if (error === '#ErrorClosingFile')
+          {
+            this.errorDialogTitle = this.$i18n.t('modals.saveClosingError.title');
+            this.errorDialogText = this.$i18n.t('modals.saveClosingError.text');
+            this.$refs['errorDialog'].open();
+          }
+          else {
+            this.$refs['saveSuccessfulDialog'].open();
+          }
+        });
+      },
     },
     components: {
       GamePage,

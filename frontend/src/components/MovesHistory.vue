@@ -177,6 +177,9 @@ export default {
     },
     clearSelection: function() {
       this.selectedPosition = undefined;
+    },
+    hasData: function() {
+      return this.history.length > 0;
     }
   },
   components: {
