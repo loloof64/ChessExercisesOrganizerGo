@@ -16,8 +16,8 @@
         <loloof64-chessboard
           size="600"
           :promotion_dialog_title="$t('modals.promotion.title')"
-          :white_player_human="playerHasWhite === true"
-          :black_player_human="playerHasWhite === false"
+          :white_player_human="whitePlayerHuman"
+          :black_player_human="blackPlayerHuman"
           @checkmate="notifyCheckmate"
           @stalemate="notifyStalemate"
           @perpetual_draw="notifyPerpetualDraw"
@@ -91,31 +91,29 @@ import MovesHistory from "./MovesHistory";
     */
 
 export default {
-  props: {
-    playerHasWhite: {
-      type: Boolean,
-      default: true,
-    }
-  },
   data() {
     return {
       message: " ",
       raised: true,
       errorDialog: false,
+      whitePlayerHuman: true,
+      blackPlayerHuman: true,
       errorDialogTitle: "",
       errorDialogText: "",
       okButtonText: "Ok",
       history: [],
-      orderedHistory: []
+      orderedHistory: [],
     };
   },
   methods: {
-    newGame: function(startPosition) {
+    newGame: function(startPosition, whitePlayerHuman) {
       this.$refs["history"].clearSelection();
       this.history = [];
       this.updateOrderedHistory();
 
       const boardComponent = document.querySelector("loloof64-chessboard");
+      this.whitePlayerHuman = whitePlayerHuman;
+      this.blackPlayerHuman = !whitePlayerHuman;
       boardComponent.newGame(startPosition);
     },
     addMoveToHistory: function(event) {

@@ -12,7 +12,7 @@
     <v-content>
       <v-container fluid class="px-0">
         <v-layout justify-center align-center class="px-0">
-          <game-page ref="gameZone" @snackbar="showSnackbar" :playerHasWhite="playerHasWhite"></game-page>
+          <game-page ref="gameZone" @snackbar="showSnackbar"></game-page>
         </v-layout>
 
         <SimpleModalDialog ref="settingsDialog" :title="$t('modals.settings.title')">
@@ -70,7 +70,6 @@
       errorDialogTitle: '',
       errorDialogText: '',
       snackBarMessage: '',
-      playerHasWhite: true,
     }),
     mounted() {
       this.$i18n.locale = navigator.language.substring(0, 2);
@@ -94,7 +93,7 @@
         }
       },
       doStartNewGame: function() {
-        const fileName = 'PgnViergeAvecNoirs';
+        const fileName = 'PgnVierge';
         const filePath = '/home/laurent-bernabe/Documents/temp/pgn/' + fileName + '.pgn';
         window.backend.TextFileManager.GetTextFileContentManually(filePath)
         .then(content => {
@@ -114,9 +113,9 @@
             const chessInstance = new Chess(result.finalPosition);
 
             const resultingPosition = chessInstance.fen();
-            this.playerHasWhite = chessInstance.turn() === 'w';
+            const playerHasWhite = chessInstance.turn() === 'w';
 
-            this.$refs['gameZone'].newGame(resultingPosition);
+            this.$refs['gameZone'].newGame(resultingPosition, playerHasWhite);
             this.$refs['snackbar'].open(this.$i18n.t('game.status.started'));
           }
           catch (error) {
