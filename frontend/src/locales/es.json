@@ -47,6 +47,14 @@
         "stopGame": {
             "title": "Parar este partida ?",
             "text": "Realmenter quiere parar esta corriente partida ?"
+        },
+        "failedToReadPgn": {
+            "title": "Error leerando al PGN",
+            "text": "No se puedo leer al PGN"
+        },
+        "invalidPgn": {
+            "title": "Error leerando al PGN",
+            "text": "The PGN es no valido"
         }
     },
     "game": {

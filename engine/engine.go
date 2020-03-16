@@ -65,7 +65,10 @@ func (engine *UciEngine) PlayPosition(positionFen string) string {
 	return results.BestMove
 }
 
-//////////// Temporary zone
+// SetEnginePathManually loads an engine from a given path, without a file chooser.
+// path string: the absolute path
+// [output] string: the error type if any
+// #ConfigEngineErr: could not set the required engine
 func (engine *UciEngine) SetEnginePathManually(path string) string {
 	newEngine, err := uci.NewEngine(path)
 	if err != nil {
@@ -81,5 +84,3 @@ func (engine *UciEngine) SetEnginePathManually(path string) string {
 	engine.eng = newEngine
 	return ""
 }
-
-////////////////////////////

@@ -47,6 +47,14 @@
         "stopGame": {
             "title": "Quit current game ?",
             "text": "Do you really want to stop current game ?"
+        },
+        "failedToReadPgn": {
+            "title": "Error reading PGN",
+            "text": "Failed to read the given PGN"
+        },
+        "invalidPgn": {
+            "title": "Error reading PGN",
+            "text": "The given PGN is not valid"
         }
     },
     "game": {

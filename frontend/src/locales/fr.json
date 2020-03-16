@@ -47,11 +47,19 @@
         "stopGame": {
             "title": "Quitter la partie ?",
             "text": "Souhaitez-vous vraiment interrompre la partie en cours ?"
+        },
+        "failedToReadPgn": {
+            "title": "Erreur de lecture du PGN",
+            "text": "Echec de lecture du PGN"
+        },
+        "invalidPgn": {
+            "title": "Erreur de lecture du PGN",
+            "text": "Le PGN est incorrect"
         }
     },
     "game": {
         "ended": {
-            "checkmate": "{winner} a gagné par échec et mat.",
+            "checkmate": "{winner} ont gagné par échec et mat.",
             "stalemate": "Pat.",
             "perpetualDraw": "Nulle par la triple répétition de position.",
             "missingMaterial": "Nulle par insuffisance matérielle.",

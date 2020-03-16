@@ -2,6 +2,7 @@ package main
 
 import (
 	"chess_exercises_organizer/engine"
+	"chess_exercises_organizer/textloader"
 
 	"github.com/leaanthony/mewn"
 	"github.com/wailsapp/wails"
@@ -22,5 +23,6 @@ func main() {
 	})
 
 	app.Bind(engine.NewUciEngine())
+	app.Bind(textloader.NewTextLoader())
 	app.Run()
 }

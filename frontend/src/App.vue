@@ -57,6 +57,9 @@
   import SimpleModalDialog from './components/SimpleModalDialog';
   import SimpleSnackBar from './components/SimpleSnackBar';
 
+  import Chess from 'chess.js';
+  import pgnReader from './libs/pgn';
+
   export default {
     data: () => ({
       errorDialogTitle: '',
@@ -85,8 +88,27 @@
         }
       },
       doStartNewGame: function() {
-        this.$refs['gameZone'].newGame();
-        this.$refs['snackbar'].open(this.$i18n.t('game.status.started'));
+        const fileName = 'PgnVierge';
+        window.backend.TextLoader.GetTextFileContentManually('/home/laurent-bernabe/Documents/temp/pgn/' + fileName + '.pgn')
+        .then(content => {
+          if (content === '#ErrorReadingFile') {
+            this.errorDialogTitle = this.$i18n.t('modals.failedToReadPgn.title');
+            this.errorDialogText = this.$i18n.t('modals.failedToReadPgn.text');
+            this.$refs['errorDialog'].open();
+            return;
+          }
+
+          const loader = new pgnReader({
+            pgn: content,
+          });
+
+          const result = loader.load_pgn();
+          const chessInstance = new Chess(result.finalPosition);
+
+          const resultingPosition = chessInstance.fen();
+          this.$refs['gameZone'].newGame(resultingPosition);
+          this.$refs['snackbar'].open(this.$i18n.t('game.status.started'));
+        });
       },
       stopGameRequest: function() {
         const chessBoard = document.querySelector('loloof64-chessboard');
