@@ -16,8 +16,8 @@
         <loloof64-chessboard
           size="600"
           :promotion_dialog_title="$t('modals.promotion.title')"
-          white_player_human="true"
-          black_player_human="true"
+          :white_player_human="playerHasWhite === true"
+          :black_player_human="playerHasWhite === false"
           @checkmate="notifyCheckmate"
           @stalemate="notifyStalemate"
           @perpetual_draw="notifyPerpetualDraw"
@@ -91,6 +91,12 @@ import MovesHistory from "./MovesHistory";
     */
 
 export default {
+  props: {
+    playerHasWhite: {
+      type: Boolean,
+      default: true,
+    }
+  },
   data() {
     return {
       message: " ",
@@ -256,7 +262,7 @@ export default {
         const historyComponent = this.$refs["history"];
         historyComponent.confirmPositionSet(evt);
       }
-    }
+    },
   },
   components: {
     MovesHistory

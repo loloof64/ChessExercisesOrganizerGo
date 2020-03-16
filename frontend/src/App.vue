@@ -11,7 +11,7 @@
     <v-content>
       <v-container fluid class="px-0">
         <v-layout justify-center align-center class="px-0">
-          <game-page ref="gameZone" @snackbar="showSnackbar"></game-page>
+          <game-page ref="gameZone" @snackbar="showSnackbar" :playerHasWhite="playerHasWhite"></game-page>
         </v-layout>
 
         <SimpleModalDialog ref="settingsDialog" :title="$t('modals.settings.title')">
@@ -65,6 +65,7 @@
       errorDialogTitle: '',
       errorDialogText: '',
       snackBarMessage: '',
+      playerHasWhite: true,
     }),
     mounted() {
       this.$i18n.locale = navigator.language.substring(0, 2);
@@ -88,8 +89,9 @@
         }
       },
       doStartNewGame: function() {
-        const fileName = 'NotAPgn';
-        window.backend.TextLoader.GetTextFileContentManually('/home/laurent-bernabe/Documents/temp/pgn/' + fileName + '.pgn')
+        const fileName = 'PgnViergeAvecNoirs';
+        const filePath = '/home/laurent-bernabe/Documents/temp/pgn/' + fileName + '.pgn';
+        window.backend.TextLoader.GetTextFileContentManually(filePath)
         .then(content => {
           if (content === '#ErrorReadingFile') {
             this.errorDialogTitle = this.$i18n.t('modals.failedToReadPgn.title');
@@ -107,6 +109,8 @@
             const chessInstance = new Chess(result.finalPosition);
 
             const resultingPosition = chessInstance.fen();
+            this.playerHasWhite = chessInstance.turn() === 'w';
+
             this.$refs['gameZone'].newGame(resultingPosition);
             this.$refs['snackbar'].open(this.$i18n.t('game.status.started'));
           }
