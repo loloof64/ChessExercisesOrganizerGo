@@ -63,7 +63,7 @@ func (loader TextFileManager) GetTextFileContentManually(path string) string {
 // #ErrorSavingFile: the file could not be saved
 // #ErrorClosingFile: the new file could not be closed
 func (loader TextFileManager) SaveTextFile(content string) string {
-	selectedFile := loader.Runtime.Dialog.SelectFile()
+	selectedFile := loader.Runtime.Dialog.SelectSaveFile()
 
 	file, err := os.Create(selectedFile)
 	if err != nil {
