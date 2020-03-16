@@ -88,7 +88,7 @@
         }
       },
       doStartNewGame: function() {
-        const fileName = 'PgnVierge';
+        const fileName = 'NotAPgn';
         window.backend.TextLoader.GetTextFileContentManually('/home/laurent-bernabe/Documents/temp/pgn/' + fileName + '.pgn')
         .then(content => {
           if (content === '#ErrorReadingFile') {
@@ -102,12 +102,20 @@
             pgn: content,
           });
 
-          const result = loader.load_pgn();
-          const chessInstance = new Chess(result.finalPosition);
+          try {
+            const result = loader.load_pgn();
+            const chessInstance = new Chess(result.finalPosition);
 
-          const resultingPosition = chessInstance.fen();
-          this.$refs['gameZone'].newGame(resultingPosition);
-          this.$refs['snackbar'].open(this.$i18n.t('game.status.started'));
+            const resultingPosition = chessInstance.fen();
+            this.$refs['gameZone'].newGame(resultingPosition);
+            this.$refs['snackbar'].open(this.$i18n.t('game.status.started'));
+          }
+          catch (error) {
+            console.error(error);
+            this.errorDialogTitle = this.$i18n.t('modals.failedToReadPgn.title');
+            this.errorDialogText = this.$i18n.t('modals.failedToReadPgn.text');
+            this.$refs['errorDialog'].open();
+          }
         });
       },
       stopGameRequest: function() {
