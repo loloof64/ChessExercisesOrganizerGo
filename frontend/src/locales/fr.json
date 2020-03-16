@@ -86,7 +86,8 @@
         },
         "status": {
             "started": "Nouvelle partie démarrée.",
-            "stopped": "Partie courante interrompue."
+            "stopped": "Partie courante interrompue.",
+            "already_finished": "Partie déjà terminée."
         }
     },
     "history": {

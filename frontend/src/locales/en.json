@@ -86,7 +86,8 @@
         },
         "status": {
             "started": "New game started.",
-            "stopped": "Current game stopped."
+            "stopped": "Current game stopped.",
+            "already_finished": "Game already finished."
         }
     },
     "history": {

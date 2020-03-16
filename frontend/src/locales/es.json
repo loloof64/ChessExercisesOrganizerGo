@@ -86,7 +86,8 @@
         },
         "status": {
             "started": "Nueva partida empiezada.",
-            "stopped": "Corriente partida parada."
+            "stopped": "Corriente partida parada.",
+            "already_finished": "Partida ya terminada."
         }
     },
     "history": {

@@ -93,7 +93,7 @@
         }
       },
       doStartNewGame: function() {
-        const fileName = 'PgnVierge';
+        const fileName = 'GameFinished_1';
         const filePath = '/home/laurent-bernabe/Documents/temp/pgn/' + fileName + '.pgn';
         window.backend.TextFileManager.GetTextFileContentManually(filePath)
         .then(content => {
@@ -116,7 +116,13 @@
             const playerHasWhite = chessInstance.turn() === 'w';
 
             this.$refs['gameZone'].newGame(resultingPosition, playerHasWhite);
-            this.$refs['snackbar'].open(this.$i18n.t('game.status.started'));
+            const chessBoard = document.querySelector('loloof64-chessboard');
+            if (chessBoard.gameIsInProgress()) {
+              this.$refs['snackbar'].open(this.$i18n.t('game.status.started'));
+            }
+            else {
+              this.$refs['snackbar'].open(this.$i18n.t('game.status.already_finished'));
+            }
           }
           catch (error) {
             console.error(error);
