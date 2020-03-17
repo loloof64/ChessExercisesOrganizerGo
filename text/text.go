@@ -41,12 +41,12 @@ func (loader *TextFileManager) GetTextFileContent() string {
 	return result
 }
 
-// GetTextFileContentManually let you read content from a text file without file chooser.
+// GetTextFileContentWithPathProviden let you read content from a text file without file chooser.
 // path string: the absolute path
 // [output] string: the text content if no error
 // otherwise the error code:
 // #ErrorReadingFile: the file could not be read
-func (loader TextFileManager) GetTextFileContentManually(path string) string {
+func (loader TextFileManager) GetTextFileContentWithPathProviden(path string) string {
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		return "#ErrorReadingFile"
@@ -87,13 +87,13 @@ func (loader TextFileManager) SaveTextFile(content string) string {
 	return ""
 }
 
-// SaveTextFileManually save text content into given file path.
+// SaveTextFileWithPathProviden save text content into given file path.
 // path string: the absolute path
 // content string: the content to save
 // [output] string: the error if any
 // #ErrorSavingFile: the file could not be saved
 // #ErrorClosingFile: the new file could not be closed
-func (loader TextFileManager) SaveTextFileManually(path string, content string) string {
+func (loader TextFileManager) SaveTextFileWithPathProviden(path string, content string) string {
 	file, err := os.Create(path)
 	if err != nil {
 		fmt.Println(err)

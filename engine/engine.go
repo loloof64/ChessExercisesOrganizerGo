@@ -22,10 +22,10 @@ func NewUciEngine() *UciEngine {
 	return &UciEngine{}
 }
 
-// Load let the user select the engine thanks to a dialog
+// LoadEngine let the user select the engine thanks to a dialog
 // [output] string: the error type if any
 // #ConfigEngineErr: could not set the required engine
-func (engine *UciEngine) Load() string {
+func (engine *UciEngine) LoadEngine() string {
 	path := engine.Runtime.Dialog.SelectFile()
 
 	newEngine, err := uci.NewEngine(path)
@@ -56,7 +56,7 @@ func (engine *UciEngine) PlayPosition(positionFen string) string {
 
 	engine.eng.SetFEN(positionFen)
 	resultOpts := uci.HighestDepthOnly | uci.IncludeUpperbounds | uci.IncludeLowerbounds
-	results, error := engine.eng.GoDepth(10, resultOpts)
+	results, error := engine.eng.GoDepth(16, resultOpts)
 
 	if error != nil {
 		return "#ComputationError"
@@ -65,11 +65,11 @@ func (engine *UciEngine) PlayPosition(positionFen string) string {
 	return results.BestMove
 }
 
-// SetEnginePathManually loads an engine from a given path, without a file chooser.
+// LoadEngineWithPathProviden loads an engine from a given path, without a file chooser.
 // path string: the absolute path
 // [output] string: the error type if any
 // #ConfigEngineErr: could not set the required engine
-func (engine *UciEngine) SetEnginePathManually(path string) string {
+func (engine *UciEngine) LoadEngineWithPathProviden(path string) string {
 	newEngine, err := uci.NewEngine(path)
 	if err != nil {
 		return "#ConfigEngineErr"

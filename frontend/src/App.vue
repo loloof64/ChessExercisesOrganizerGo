@@ -15,9 +15,7 @@
           <game-page ref="gameZone" @snackbar="showSnackbar"></game-page>
         </v-layout>
 
-        <SimpleModalDialog ref="settingsDialog" :title="$t('modals.settings.title')">
-          <v-btn @click="selectEngine()">{{$t('modals.settings.configureEngine')}}</v-btn>
-        </SimpleModalDialog>
+        <SettingsDialog ref="settingsDialog"></SettingsDialog>
 
         <SimpleModalDialog ref="errorDialog" :title="errorDialogTitle">
             <v-card-text>{{errorDialogText}}</v-card-text>
@@ -61,6 +59,7 @@
   import ToolbarButton from './components/ToolbarButton';
   import SimpleModalDialog from './components/SimpleModalDialog';
   import SimpleSnackBar from './components/SimpleSnackBar';
+  import SettingsDialog from './components/SettingsDialog';
 
   import Chess from 'chess.js';
   import pgnReader from './libs/pgn';
@@ -73,14 +72,6 @@
     }),
     mounted() {
       this.$i18n.locale = navigator.language.substring(0, 2);
-      window.backend.UciEngine.SetEnginePathManually('/home/laurent-bernabe/Programmes/Echecs/stockfish-11-linux/stockfish-11-linux/Linux/stockfish_20011801_x64_modern')
-        .then(error => {
-          if (error === '#ConfigEngineErr'){
-            this.errorDialogTitle = this.$i18n.t('modals.settings.failedToSetupEngineTitle');
-            this.errorDialogText = this.$i18n.t('modals.settings.failedToSetupEngineText');
-            this.$refs['errorDialog'].open();
-          }
-        })
     },
     methods: {
       newGameRequest: function() {
@@ -93,9 +84,9 @@
         }
       },
       doStartNewGame: function() {
-        const fileName = 'GameFinished_1';
+        const fileName = 'PgnVierge';
         const filePath = '/home/laurent-bernabe/Documents/temp/pgn/' + fileName + '.pgn';
-        window.backend.TextFileManager.GetTextFileContentManually(filePath)
+        window.backend.TextFileManager.GetTextFileContentWithPathProviden(filePath)
         .then(content => {
           if (content === '#ErrorReadingFile') {
             this.errorDialogTitle = this.$i18n.t('modals.failedToReadPgn.title');
@@ -151,15 +142,6 @@
       showSettingsDialog: function() {
         this.$refs['settingsDialog'].open();
       },
-      selectEngine: function() {
-        window.backend.UciEngine.Load().then(error => {
-          if (error === '#ConfigEngineErr'){
-            this.errorDialogTitle = this.$i18n.t('modals.settings.failedToSetupEngineTitle');
-            this.errorDialogText = this.$i18n.t('modals.settings.failedToSetupEngineText');
-            this.$refs['errorDialog'].open();
-          }
-        });
-      },
       showSnackbar: function(event) {
         this.$refs['snackbar'].open(event);
       },
@@ -175,7 +157,7 @@
         const fileName = 'PgnGenere';
         const filePath = '/home/laurent-bernabe/Documents/temp/pgn/' + fileName + '.pgn';
 
-        window.backend.TextFileManager.SaveTextFileManually(filePath, pgn).then(error => {
+        window.backend.TextFileManager.SaveTextFile(pgn).then(error => {
           if (error === '#ErrorSavingFile')
           {
             this.errorDialogTitle = this.$i18n.t('modals.saveError.title');
@@ -199,6 +181,7 @@
       ToolbarButton,
       SimpleModalDialog,
       SimpleSnackBar,
+      SettingsDialog,
     },
     props: {
       source: String
