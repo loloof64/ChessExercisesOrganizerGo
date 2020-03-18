@@ -69,9 +69,18 @@
       errorDialogTitle: '',
       errorDialogText: '',
       snackBarMessage: '',
+      settings: undefined,
     }),
     mounted() {
       this.$i18n.locale = navigator.language.substring(0, 2);
+      window.backend.SettingsManager.Load().then(content => {
+        if (content === '#ConversionToJsonError') {
+          this.settings = undefined;
+        }
+        else {
+          this.settings = content;
+        }
+      });
     },
     methods: {
       newGameRequest: function() {
@@ -140,7 +149,7 @@
         chessBoard.toggleSide();
       },
       showSettingsDialog: function() {
-        this.$refs['settingsDialog'].open();
+        this.$refs['settingsDialog'].open(this.settings);
       },
       showSnackbar: function(event) {
         this.$refs['snackbar'].open(event);

@@ -35,6 +35,10 @@ export default {
         type: Function,
         required: false,
       },
+      cancelAction: {
+        type: Function,
+        required: false,
+      },
       cancelButton: {
         type: Boolean,
         default: false,
@@ -57,6 +61,7 @@ export default {
         },
         closeWithoutAction() {
           this.opened = false;
+          if (this.cancelAction) this.cancelAction();
         }
     }
 }

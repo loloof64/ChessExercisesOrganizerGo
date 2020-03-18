@@ -1,6 +1,7 @@
 package main
 
 import (
+	"chess_exercises_organizer/appsettings"
 	"chess_exercises_organizer/engine"
 	"chess_exercises_organizer/text"
 
@@ -24,5 +25,6 @@ func main() {
 
 	app.Bind(engine.NewUciEngine())
 	app.Bind(text.NewTextFileManager())
+	app.Bind(appsettings.NewSettings())
 	app.Run()
 }
