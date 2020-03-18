@@ -44,11 +44,8 @@ export default {
           this.$refs["errorDialog"].open();
         }
       });
-    },
-    selectEngine: function() {
-      const path =
-        "/home/laurent-bernabe/Programmes/Echecs/stockfish-11-linux/stockfish-11-linux/Linux/stockfish_20011801_x64_modern";
-      window.backend.UciEngine.LoadEngineWithPathProviden(path).then(error => {
+
+      window.backend.UciEngine.LoadEngineWithPathProviden(this.settings.EnginePath).then(error => {
         if (error === "#ConfigEngineErr") {
           this.errorDialogTitle = this.$i18n.t(
             "modals.settings.failedToSetupEngineTitle"
@@ -59,6 +56,13 @@ export default {
           this.$refs["errorDialog"].open();
         }
       });
+    },
+    selectEngine: function() {
+      // Production mode : path should be set to the value of
+      // window.backend.UciEngine.GetUserEnginePath promise instead
+      const path =
+        "/home/laurent-bernabe/Programmes/Echecs/stockfish-11-linux/stockfish-11-linux/Linux/stockfish_20011801_x64_modern";
+      this.tempSettings.EnginePath = path;
     },
     cancel: function() {
       this.tempSettings = this.settings;

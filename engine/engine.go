@@ -22,25 +22,12 @@ func NewUciEngine() *UciEngine {
 	return &UciEngine{}
 }
 
-// LoadEngine let the user select the engine thanks to a dialog
-// [output] string: the error type if any
-// #ConfigEngineErr: could not set the required engine
-func (engine *UciEngine) LoadEngine() string {
+// GetUserEnginePath make user select his engine file, with a file chooser
+// and returns the path as string
+// [output] string: the choosen file, or empty string if user cancelled
+func (engine *UciEngine) GetUserEnginePath() string {
 	path := engine.Runtime.Dialog.SelectFile()
-
-	newEngine, err := uci.NewEngine(path)
-	if err != nil {
-		return "#ConfigEngineErr"
-	}
-
-	newEngine.SetOptions(uci.Options{
-		Hash:    128,
-		Ponder:  false,
-		OwnBook: true,
-	})
-
-	engine.eng = newEngine
-	return ""
+	return path
 }
 
 // PlayPosition attempts to get the best move from the given position
