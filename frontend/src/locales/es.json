@@ -33,7 +33,14 @@
             "failedToSetupEngineText": "Fracasco de la seleccion del motor : tienes derechos para el acceso ?",
             "failedToSaveTitle": "Fracasco de la salvaguarda",
             "failedToSaveText": "Fracasco de la salvaguarda de los parametros",
-            "boardBackgroundColor": "color del fondo del tablero"
+            "boardBackgroundColor": "color del fondo del tablero",
+            "boardCoordinatesColor": "color de las coordenadas del tablero",
+            "boardLastMoveArrowColor": "color de la flecha del ultimo golpe del tablero",
+            "boardWhiteCellsColor": "color de las casillas blancas del tablero",
+            "boardBlackCellsColor": "color de las casillas negras del tablero",
+            "boardDndStartCellColor": "color del pricipio de arrastrar y soltar del tablero",
+            "boardDndEndCellColor": "color del final de arrastrar y soltar del tablero",
+            "boardDndSCrossColor": "color de la cruz de arrastrat y soltar del tablero"
         },
         "promotion": {
             "title": "Elige la pieza de promocion"

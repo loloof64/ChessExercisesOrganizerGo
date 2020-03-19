@@ -33,7 +33,14 @@
             "failedToSetupEngineText": "Echec de sélection du moteur : en possedez-vous les droits d'accès ?",
             "failedToSaveTitle": "Echec de sauvegarde",
             "failedToSaveText": "Echec de sauvegarde des paramètres",
-            "boardBackgroundColor": "couleur de fond de l'échiquier"
+            "boardBackgroundColor": "couleur de fond de l'échiquier",
+            "boardCoordinatesColor": "couleur des coordonnées de l'échiquier",
+            "boardLastMoveArrowColor": "couleur de la flèche du dernier coup de l'échiquier",
+            "boardWhiteCellsColor": "couleur des cases blanches de l'échiquier",
+            "boardBlackCellsColor": "couleur des cases noires de l'échiquier",
+            "boardDndStartCellColor": "couleur de début de 'Drag and Drop' de l'échiquier",
+            "boardDndEndCellColor": "couleur de fin de 'Drag and Drop' de l'échiquier",
+            "boardDndSCrossColor": "couleur de la croix de 'Drag and Drop' de l'échiquier"
         },
         "promotion": {
             "title": "Veuillez choisir la pièce de promotion"

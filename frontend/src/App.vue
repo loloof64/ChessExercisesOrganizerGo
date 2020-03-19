@@ -14,6 +14,13 @@
         <v-layout justify-center align-center class="px-0">
           <game-page ref="gameZone" @snackbar="showSnackbar"
             :boardBackground="boardBackgroundColor"
+            :coordinates_color="boardCoordintatesColor"
+            :move_highlight_color="boardLastMoveArrowColor"
+            :white_cell_color="boardWhiteCellsColor"
+            :black_cell_color="boardBlackCellsColor"
+            :origin_cell_color="boardDndStartColor"
+            :target_cell_color="boardDndEndColor"
+            :dnd_cross_color="boardDndCrossColor"
           ></game-page>
         </v-layout>
 
@@ -74,7 +81,14 @@
       errorDialogText: '',
       snackBarMessage: '',
       settings: undefined,
-      boardBackgroundColor: '#124589',
+      boardBackgroundColor: undefined,
+      boardCoordintatesColor: undefined,
+      boardLastMoveArrowColor: undefined,
+      boardWhiteCellsColor: undefined,
+      boardBlackCellsColor: undefined,
+      boardDndStartColor: undefined,
+      boardDndEndColor: undefined,
+      boardDndCrossColor: undefined,
     }),
     mounted() {
       this.$i18n.locale = navigator.language.substring(0, 2);
@@ -83,9 +97,10 @@
           this.settings = undefined;
         }
         else {
-          const parsedContent = JSON.parse(content);
-          this.settings = JSON.parse(parsedContent);
-          this.updateBoardAndEngine(JSON.parse(parsedContent));
+          const parsedContent = JSON.parse(JSON.parse(content));
+
+          this.settings = parsedContent;
+          this.updateBoardAndEngine(parsedContent);
         }
       });
     },
@@ -194,6 +209,13 @@
       updateBoardAndEngine: function(configuration) {
         // Apply modifications on board.
         this.boardBackgroundColor = configuration.BoardBackgroundColor;
+        this.boardCoordintatesColor = configuration.BoardCoordinatesColor;
+        this.boardLastMoveArrowColor = configuration.BoardLastMoveArrowColor;
+        this.boardWhiteCellsColor = configuration.BoardWhiteCellsColor;
+        this.boardBlackCellsColor = configuration.BoardBlackCellsColor;
+        this.boardDndStartColor = configuration.BoardDndStartColor;
+        this.boardDndEndColor = configuration.BoardDndEndColor;
+        this.boardDndCrossColor = configuration.BoardDndCrossColor;
 
         // Update used engine
         window.backend.UciEngine.LoadEngineWithPathProviden(configuration.EnginePath).then(error => {

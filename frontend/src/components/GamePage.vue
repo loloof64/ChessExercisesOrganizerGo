@@ -26,6 +26,13 @@
           @waiting_manual_move="makeComputerMove"
           @move_done="addMoveToHistory"
           :background="boardBackground"
+          :coordinates_color="coordinates_color"
+          :move_highlight_color="move_highlight_color"
+          :white_cell_color="white_cell_color"
+          :black_cell_color="black_cell_color"
+          :origin_cell_color="origin_cell_color"
+          :target_cell_color="target_cell_color"
+          :dnd_cross_color="dnd_cross_color"
         ></loloof64-chessboard>
       </v-col>
 
@@ -96,7 +103,35 @@ export default {
     boardBackground: {
       type: String,
       required: true,
-    }
+    },
+    coordinates_color: {
+      type: String,
+      required: true,
+    },
+    move_highlight_color: {
+      type: String,
+      required: true,
+    },
+    white_cell_color: {
+      type: String,
+      required: true,
+    },
+    black_cell_color: {
+      type: String,
+      required: true,
+    },
+    origin_cell_color: {
+      type: String,
+      required: true,
+    },
+    target_cell_color: {
+      type: String,
+      required: true,
+    },
+    dnd_cross_color: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {

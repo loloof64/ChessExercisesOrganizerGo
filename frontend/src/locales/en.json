@@ -33,7 +33,14 @@
             "failedToSetupEngineText": "Failed to select the engine : have you got the access rights for it ?",
             "failedToSaveTitle": "Failed to save",
             "failedToSaveText": "Failed to save the settings",
-            "boardBackgroundColor": "board background color"
+            "boardBackgroundColor": "board background color",
+            "boardCoordinatesColor": "board coordinates color",
+            "boardLastMoveArrowColor": "board last move arrow color",
+            "boardWhiteCellsColor": "board white cells color",
+            "boardBlackCellsColor": "board black cells color",
+            "boardDndStartCellColor": "board Drag and Drop start cell color",
+            "boardDndEndCellColor": "board Drag and Drop end cell color",
+            "boardDndSCrossColor": "board Drag and Drop end cell color"
         },
         "promotion": {
             "title": "Select the promotion piece"

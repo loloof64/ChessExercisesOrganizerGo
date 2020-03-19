@@ -18,8 +18,15 @@ type SettingsManager struct {
 
 // Settings handles settings values
 type Settings struct {
-	EnginePath           string
-	BoardBackgroundColor string
+	EnginePath              string
+	BoardBackgroundColor    string
+	BoardCoordinatesColor   string
+	BoardLastMoveArrowColor string
+	BoardWhiteCellsColor    string
+	BoardBlackCellsColor    string
+	BoardDndStartColor      string
+	BoardDndEndColor        string
+	BoardDndCrossColor      string
 }
 
 // WailsInit initialize the structure for Wails
@@ -44,8 +51,15 @@ func NewSettings() *SettingsManager {
 func (settings *SettingsManager) Load() string {
 
 	defaultSettings := Settings{
-		EnginePath:           "",
-		BoardBackgroundColor: "#0066ff",
+		EnginePath:              "",
+		BoardBackgroundColor:    "#06f",
+		BoardCoordinatesColor:   "#f90",
+		BoardLastMoveArrowColor: "#cde",
+		BoardWhiteCellsColor:    "#fc0",
+		BoardBlackCellsColor:    "#a33",
+		BoardDndStartColor:      "#12FC23",
+		BoardDndEndColor:        "#FC2312",
+		BoardDndCrossColor:      "#898923",
 	}
 
 	dir, err := settings.Runtime.FileSystem.HomeDir()
