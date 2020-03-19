@@ -167,8 +167,7 @@
         this.$refs['gameZone'].$refs['history'].selectLastMove()
       },
       toggleSide: function() {
-        const chessBoard = document.querySelector('loloof64-chessboard');
-        chessBoard.toggleSide();
+        this.$refs['gameZone'].toggleSide();
       },
       showSettingsDialog: function() {
         this.$refs['settingsDialog'].open(this.settings);

@@ -25,6 +25,7 @@
           @fifty_moves_draw="notifyFiftyMovesDraw"
           @waiting_manual_move="makeComputerMove"
           @move_done="addMoveToHistory"
+          :reversed="boardReversed"
           :background="boardBackground"
           :coordinates_color="coordinates_color"
           :move_highlight_color="move_highlight_color"
@@ -145,6 +146,7 @@ export default {
       okButtonText: "Ok",
       history: [],
       orderedHistory: [],
+      boardReversed: false,
     };
   },
   methods: {
@@ -156,6 +158,8 @@ export default {
       const boardComponent = document.querySelector("loloof64-chessboard");
       this.whitePlayerHuman = whitePlayerHuman;
       this.blackPlayerHuman = !whitePlayerHuman;
+      this.boardReversed = !whitePlayerHuman;
+
       boardComponent.newGame(startPosition);
     },
     addMoveToHistory: function(event) {
@@ -303,6 +307,9 @@ export default {
         historyComponent.confirmPositionSet(evt);
       }
     },
+    toggleSide: function() {
+      this.boardReversed = ! this.boardReversed;
+    }
   },
   components: {
     MovesHistory
