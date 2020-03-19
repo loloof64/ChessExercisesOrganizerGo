@@ -2,6 +2,7 @@ package appsettings
 
 import (
 	"encoding/json"
+	"io/ioutil"
 	"os"
 	"path"
 
@@ -61,7 +62,7 @@ func (settings *SettingsManager) Load() string {
 	}
 
 	filePath := path.Join(dir, "ChessExercisesOrganizerData", "config.txt")
-	text, err := os.Open(filePath)
+	text, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		usedSettings, err := json.Marshal(defaultSettings)
 		if err != nil {
@@ -69,9 +70,8 @@ func (settings *SettingsManager) Load() string {
 		}
 		return string(usedSettings)
 	}
-	defer text.Close()
 
-	usedSettings, err := json.Marshal(text)
+	usedSettings, err := json.Marshal(string(text))
 	if err != nil {
 		return "#ConversionToJsonError"
 	}

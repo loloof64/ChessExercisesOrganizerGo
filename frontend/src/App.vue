@@ -83,7 +83,7 @@
           this.settings = undefined;
         }
         else {
-          this.settings = content;
+          this.settings = JSON.parse(content);
         }
       });
     },
@@ -154,6 +154,10 @@
         chessBoard.toggleSide();
       },
       showSettingsDialog: function() {
+        ////////////////////////////////////////////
+        console.log("current settings");
+        console.log(this.settings);
+        ////////////////////////////////////////////
         this.$refs['settingsDialog'].open(this.settings);
       },
       showSnackbar: function(event) {
