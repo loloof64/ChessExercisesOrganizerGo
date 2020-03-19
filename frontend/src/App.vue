@@ -83,7 +83,9 @@
           this.settings = undefined;
         }
         else {
-          this.settings = JSON.parse(content);
+          const parsedContent = JSON.parse(content);
+          this.settings = JSON.parse(parsedContent);
+          this.updateBoardAndEngine(JSON.parse(parsedContent));
         }
       });
     },
@@ -190,6 +192,9 @@
         });
       },
       updateBoardAndEngine: function(configuration) {
+        // Apply modifications on board.
+        this.boardBackgroundColor = configuration.BoardBackgroundColor;
+
         // Update used engine
         window.backend.UciEngine.LoadEngineWithPathProviden(configuration.EnginePath).then(error => {
           if (error === "#ConfigEngineErr") {
@@ -201,10 +206,7 @@
             );
             this.$refs["errorDialog"].open();
           }
-        });
-
-        // Apply modifications on board.
-        this.boardBackgroundColor = configuration.BoardBackgroundColor;        
+        });      
       }
     },
     components: {

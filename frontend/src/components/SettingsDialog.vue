@@ -79,7 +79,7 @@ export default {
       this.closeColorChoosers();
     },
     open: function(currentSettings) {
-        const newSettings = JSON.parse(currentSettings);
+        const newSettings = currentSettings;
         this.settings = newSettings;
         this.tempSettings = newSettings;
         this.$refs['modal'].open();
