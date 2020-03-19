@@ -12,7 +12,7 @@
       <v-row class="my-2">
         <v-btn cols="3" class="mx-6" @click="manageEditingBoardBackgroundColorVisibility()"
           v-bind:style="{backgroundColor: tempSettings.BoardBackgroundColor}"
-        ></v-btn>
+        >{{backgroundColorButtonText}}</v-btn>
         <div cols="9" class="mx-6 my-2">{{$t('modals.settings.boardBackgroundColor')}}</div>
       </v-row>
       <v-color-picker class="mx-6" v-if="isEditingBoardBackgroundColor" 
@@ -39,7 +39,11 @@ export default {
       errorDialogText: '',
       isEditingBoardBackgroundColor: false,
       editingBoardBackgroundColorValue: undefined,
+      backgroundColorButtonText: this.$i18n.t('modals.settings.modifyColor'),
     };
+  },
+  mounted() {
+    this.$i18n.locale = navigator.language.substring(0, 2);
   },
   methods: {
     update: function() {
@@ -81,10 +85,12 @@ export default {
       if (this.isEditingBoardBackgroundColor === true) {
         this.tempSettings.BoardBackgroundColor = this.editingBoardBackgroundColorValue.hex || this.editingBoardBackgroundColorValue;
         this.isEditingBoardBackgroundColor = false;
+        this.backgroundColorButtonText = this.$i18n.t('modals.settings.modifyColor');
       }
       else {
         this.editingBoardBackgroundColorValue = this.tempSettings.BoardBackgroundColor;
         this.isEditingBoardBackgroundColor = true;
+        this.backgroundColorButtonText = this.$i18n.t('modals.settings.acceptColor');
       }
     }
   },

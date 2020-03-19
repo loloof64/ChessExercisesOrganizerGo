@@ -26,6 +26,8 @@
         },
         "settings": {
             "title": "Configuraciones",
+            "modifyColor": "Cambiar",
+            "acceptColor": "Acordar",
             "configureEngine": "Elegir el motor UCI",
             "failedToSetupEngineTitle": "Fracasco de la seleccion del motor",
             "failedToSetupEngineText": "Fracasco de la seleccion del motor : tienes derechos para el acceso ?",

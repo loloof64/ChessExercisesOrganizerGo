@@ -26,6 +26,8 @@
         },
         "settings": {
             "title": "Settings",
+            "modifyColor": "Modify",
+            "acceptColor": "Accept",
             "configureEngine": "Select UCI engine",
             "failedToSetupEngineTitle": "Could not select this engine",
             "failedToSetupEngineText": "Failed to select the engine : have you got the access rights for it ?",
