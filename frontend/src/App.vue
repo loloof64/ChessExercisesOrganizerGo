@@ -154,10 +154,6 @@
         chessBoard.toggleSide();
       },
       showSettingsDialog: function() {
-        ////////////////////////////////////////////
-        console.log("current settings");
-        console.log(this.settings);
-        ////////////////////////////////////////////
         this.$refs['settingsDialog'].open(this.settings);
       },
       showSnackbar: function(event) {
