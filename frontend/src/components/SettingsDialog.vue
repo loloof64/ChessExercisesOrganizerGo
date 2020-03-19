@@ -14,13 +14,16 @@
       <v-row class="ml-6 my-2">
         <v-btn class="mx-6" @click="selectEngine()">{{$t('modals.settings.configureEngine')}}</v-btn>
       </v-row>
-      
+
       <!-- Background color -->
       <v-row class="ml-6 my-2">
         <v-btn cols="3" class="mx-6" @click="manageEditingBoardBackgroundColorVisibility()"
           v-bind:style="{backgroundColor: tempSettings.BoardBackgroundColor}"
         >{{backgroundColorButtonText}}</v-btn>
-        <div cols="9" class="mx-6 my-2">{{$t('modals.settings.boardBackgroundColor')}}</div>
+        <v-btn v-if="isEditingBoardBackgroundColor === true" cols="3" dark class="mx-6 red" @click="cancelEditingBoardBackground()">
+          {{$t('modals.global.cancelButton')}}
+        </v-btn>
+        <div cols="6" class="mx-6 my-2">{{$t('modals.settings.boardBackgroundColor')}}</div>
       </v-row>
       <v-color-picker class="mx-6" v-if="isEditingBoardBackgroundColor" 
         v-model="editingBoardBackgroundColorValue"></v-color-picker>
@@ -30,7 +33,10 @@
         <v-btn cols="3" class="mx-6" @click="manageEditingBoardCoordinatesColorVisibility()"
           v-bind:style="{backgroundColor: tempSettings.BoardCoordinatesColor}"
         >{{coordinatesColorButtonText}}</v-btn>
-        <div cols="9" class="mx-6 my-2">{{$t('modals.settings.boardCoordinatesColor')}}</div>
+        <v-btn v-if="isEditingBoardCoordinatesColor === true" cols="3" dark class="mx-6 red" @click="cancelEditingBoardCoordinates()">
+          {{$t('modals.global.cancelButton')}}
+        </v-btn>
+        <div cols="6" class="mx-6 my-2">{{$t('modals.settings.boardCoordinatesColor')}}</div>
       </v-row>
       <v-color-picker class="mx-6" v-if="isEditingBoardCoordinatesColor" 
         v-model="editingBoardCoordinatesColorValue"></v-color-picker>
@@ -40,7 +46,10 @@
         <v-btn cols="3" class="mx-6" @click="manageEditingBoardLastMoveArrowColorVisibility()"
           v-bind:style="{backgroundColor: tempSettings.BoardLastMoveArrowColor}"
         >{{lastMoveArrowColorButtonText}}</v-btn>
-        <div cols="9" class="mx-6 my-2">{{$t('modals.settings.boardLastMoveArrowColor')}}</div>
+        <v-btn v-if="isEditingBoardLastMoveArrowColor === true" cols="3" dark class="mx-6 red" @click="cancelEditingBoardLastMoveArrow()">
+          {{$t('modals.global.cancelButton')}}
+        </v-btn>
+        <div cols="6" class="mx-6 my-2">{{$t('modals.settings.boardLastMoveArrowColor')}}</div>
       </v-row>
       <v-color-picker class="mx-6" v-if="isEditingBoardLastMoveArrowColor" 
         v-model="editingBoardLastMoveArrowColorValue"></v-color-picker>
@@ -50,7 +59,10 @@
         <v-btn cols="3" class="mx-6" @click="manageEditingBoardLastWhiteCellsColorVisibility()"
           v-bind:style="{backgroundColor: tempSettings.BoardWhiteCellsColor}"
         >{{whiteCellsColorButtonText}}</v-btn>
-        <div cols="9" class="mx-6 my-2">{{$t('modals.settings.boardWhiteCellsColor')}}</div>
+        <v-btn v-if="isEditingBoardWhiteCellsColor === true" cols="3" dark class="mx-6 red" @click="cancelEditingBoardWhiteCells()">
+          {{$t('modals.global.cancelButton')}}
+        </v-btn>
+        <div cols="6" class="mx-6 my-2">{{$t('modals.settings.boardWhiteCellsColor')}}</div>
       </v-row>
       <v-color-picker class="mx-6" v-if="isEditingBoardWhiteCellsColor" 
         v-model="editingBoardWhiteCellsColorValue"></v-color-picker>
@@ -60,7 +72,10 @@
         <v-btn cols="3" class="mx-6" @click="manageEditingBoardLastBlackCellsColorVisibility()"
           v-bind:style="{backgroundColor: tempSettings.BoardBlackCellsColor}"
         >{{blackCellsColorButtonText}}</v-btn>
-        <div cols="9" class="mx-6 my-2">{{$t('modals.settings.boardBlackCellsColor')}}</div>
+        <v-btn v-if="isEditingBoardBlackCellsColor === true" cols="3" dark class="mx-6 red" @click="cancelEditingBoardBlackCells()">
+          {{$t('modals.global.cancelButton')}}
+        </v-btn>
+        <div cols="6" class="mx-6 my-2">{{$t('modals.settings.boardBlackCellsColor')}}</div>
       </v-row>
       <v-color-picker class="mx-6" v-if="isEditingBoardBlackCellsColor" 
         v-model="editingBoardBlackCellsColorValue"></v-color-picker>
@@ -70,7 +85,10 @@
         <v-btn cols="3" class="mx-6" @click="manageEditingBoardDndStartColorVisibility()"
           v-bind:style="{backgroundColor: tempSettings.BoardDndStartColor}"
         >{{dndStartColorButtonText}}</v-btn>
-        <div cols="9" class="mx-6 my-2">{{$t('modals.settings.boardDndStartCellColor')}}</div>
+        <v-btn v-if="isEditingBoardDndStartColor === true" cols="3" dark class="mx-6 red" @click="cancelEditingBoardDndStart()">
+          {{$t('modals.global.cancelButton')}}
+        </v-btn>
+        <div cols="6" class="mx-6 my-2">{{$t('modals.settings.boardDndStartCellColor')}}</div>
       </v-row>
       <v-color-picker class="mx-6" v-if="isEditingBoardDndStartColor" 
         v-model="editingBoardDndStartColorValue"></v-color-picker>
@@ -80,7 +98,10 @@
         <v-btn cols="3" class="mx-6" @click="manageEditingBoardDndEndColorVisibility()"
           v-bind:style="{backgroundColor: tempSettings.BoardDndEndColor}"
         >{{dndEndColorButtonText}}</v-btn>
-        <div cols="9" class="mx-6 my-2">{{$t('modals.settings.boardDndEndCellColor')}}</div>
+        <v-btn v-if="isEditingBoardDndEndColor === true" cols="3" dark class="mx-6 red" @click="cancelEditingBoardDndEnd()">
+          {{$t('modals.global.cancelButton')}}
+        </v-btn>
+        <div cols="6" class="mx-6 my-2">{{$t('modals.settings.boardDndEndCellColor')}}</div>
       </v-row>
       <v-color-picker class="mx-6" v-if="isEditingBoardDndEndColor" 
         v-model="editingBoardDndEndColorValue"></v-color-picker>
@@ -90,7 +111,10 @@
         <v-btn cols="3" class="mx-6" @click="manageEditingBoardDndSCrossColorVisibility()"
           v-bind:style="{backgroundColor: tempSettings.BoardDndCrossColor}"
         >{{dndCrossColorButtonText}}</v-btn>
-        <div cols="9" class="mx-6 my-2">{{$t('modals.settings.boardDndSCrossColor')}}</div>
+        <v-btn v-if="isEditingBoardDndCrossColor === true" cols="3" dark class="mx-6 red" @click="cancelEditingBoardDndCross()">
+          {{$t('modals.global.cancelButton')}}
+        </v-btn>
+        <div cols="6" class="mx-6 my-2">{{$t('modals.settings.boardDndSCrossColor')}}</div>
       </v-row>
       <v-color-picker class="mx-6" v-if="isEditingBoardDndCrossColor" 
         v-model="editingBoardDndCrossColorValue"></v-color-picker>
@@ -208,9 +232,6 @@ export default {
         }
 
         this.tempSettings = JSON.parse(result);
-
-        //////////////////////////////////////
-        console.log(this.tempSettings);
       });
     },
     manageEditingBoardBackgroundColorVisibility: function() {
@@ -308,6 +329,38 @@ export default {
         this.isEditingBoardDndCrossColor = true;
         this.dndCrossColorButtonText = this.$i18n.t('modals.settings.acceptColor');
       }
+    },
+    cancelEditingBoardBackground: function() {
+      this.isEditingBoardBackgroundColor = false;
+      this.backgroundColorButtonText = this.$i18n.t('modals.settings.modifyColor');
+    },
+    cancelEditingBoardCoordinates: function() {
+      this.isEditingBoardCoordinatesColor = false;
+      this.coordinatesColorButtonText = this.$i18n.t('modals.settings.modifyColor');
+    },
+    cancelEditingBoardLastMoveArrow: function() {
+      this.isEditingBoardLastMoveArrowColor = false;
+      this.lastMoveArrowColorButtonText = this.$i18n.t('modals.settings.modifyColor');
+    },
+    cancelEditingBoardWhiteCells: function() {
+      this.isEditingBoardWhiteCellsColor = false;
+      this.whiteCellsColorButtonText = this.$i18n.t('modals.settings.modifyColor');
+    },
+    cancelEditingBoardBlackCells: function() {
+      this.isEditingBoardBlackCellsColor = false;
+      this.blackCellsColorButtonText = this.$i18n.t('modals.settings.modifyColor');
+    },
+    cancelEditingBoardDndStart: function() {
+      this.isEditingBoardDndStartColor = false;
+      this.dndStartColorButtonText = this.$i18n.t('modals.settings.modifyColor');
+    },
+    cancelEditingBoardDndEnd: function() {
+      this.isEditingBoardDndEndColor = false;
+      this.dndSEndColorButtonText = this.$i18n.t('modals.settings.modifyColor');
+    },
+    cancelEditingBoardDndCross: function() {
+      this.isEditingBoardDndCrossColor = false;
+      this.dndCrossColorButtonText = this.$i18n.t('modals.settings.modifyColor');
     },
     closeColorChoosers: function() {
       this.isEditingBoardBackgroundColor = false;
