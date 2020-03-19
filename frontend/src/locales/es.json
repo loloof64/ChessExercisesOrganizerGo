@@ -47,7 +47,9 @@
             "selectedEngine": "Elegido motor: ",
             "noEngine": "ninguno",
             "coordinatesVisible": "Mostrar coordenadas del tablero",
-            "lastMoveArrowVisible": "Mostrar la flecha del utlimo golpe del tablero"
+            "lastMoveArrowVisible": "Mostrar la flecha del utlimo golpe del tablero",
+            "playerName": "Nombre del jugador: ",
+            "computerName": "Nombre del ordenador: "
         },
         "promotion": {
             "title": "Elige la pieza de promocion"

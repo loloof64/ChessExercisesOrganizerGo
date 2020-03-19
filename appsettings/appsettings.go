@@ -29,6 +29,8 @@ type Settings struct {
 	BoardDndCrossColor      string
 	CoordinatesVisible      bool
 	LastMoveArrowVisible    bool
+	PlayerName              string
+	ComputerName            string
 }
 
 // WailsInit initialize the structure for Wails
@@ -59,6 +61,8 @@ func (settings *SettingsManager) GetDefaultSettings() string {
 		BoardDndCrossColor:      "#898923",
 		CoordinatesVisible:      true,
 		LastMoveArrowVisible:    true,
+		PlayerName:              "",
+		ComputerName:            "",
 	}
 
 	result, err := json.Marshal(defaultSettings)
@@ -89,6 +93,8 @@ func (settings *SettingsManager) Load() string {
 		BoardDndCrossColor:      "#898923",
 		CoordinatesVisible:      true,
 		LastMoveArrowVisible:    true,
+		PlayerName:              "",
+		ComputerName:            "",
 	}
 
 	dir, err := settings.Runtime.FileSystem.HomeDir()

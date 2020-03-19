@@ -322,6 +322,9 @@ export default {
     },
     toggleSide: function() {
       this.boardReversed = ! this.boardReversed;
+    },
+    playerHasWhite: function() {
+      return this.whitePlayerHuman;
     }
   },
   components: {

@@ -101,7 +101,8 @@
           this.settings = undefined;
         }
         else {
-          const parsedContent = JSON.parse(JSON.parse(content));
+          let parsedContent = content;
+          while (typeof parsedContent === "string") parsedContent = JSON.parse(parsedContent);
           this.settings = parsedContent;
           this.updateBoardAndEngine(parsedContent);
         }
@@ -118,7 +119,7 @@
         }
       },
       doStartNewGame: function() {
-        const fileName = 'PgnVierge';
+        const fileName = 'PgnViergeAvecLesNoirs';
         const filePath = '/home/laurent-bernabe/Documents/temp/pgn/' + fileName + '.pgn';
         window.backend.TextFileManager.GetTextFileContentWithPathProviden(filePath)
         .then(content => {
@@ -186,11 +187,16 @@
         const historyComponent = this.$refs['gameZone'].$refs['history'];
         if (!historyComponent.hasData()) return;
 
-        const pgn = chessBoard.gamePgn();
+        const playerHasWhite = this.$refs['gameZone'].playerHasWhite();
+
+        const whiteName = playerHasWhite ? this.settings.PlayerName : this.settings.ComputerName;
+        const blackName = playerHasWhite ? this.settings.ComputerName : this.settings.PlayerName;
+        const pgn = chessBoard.gamePgn({whiteName, blackName});
         const fileName = 'PgnGenere';
         const filePath = '/home/laurent-bernabe/Documents/temp/pgn/' + fileName + '.pgn';
 
-        window.backend.TextFileManager.SaveTextFile(pgn).then(error => {
+        // Production mode, use window.backend.TextFileManager.SaveTextFile()
+        window.backend.TextFileManager.SaveTextFileWithPathProviden(filePath, pgn).then(error => {
           if (error === '#ErrorSavingFile')
           {
             this.errorDialogTitle = this.$i18n.t('modals.saveError.title');

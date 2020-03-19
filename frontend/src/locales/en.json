@@ -47,7 +47,9 @@
             "selectedEngine": "Selected engine: ",
             "noEngine": "no engine",
             "coordinatesVisible": "Show coordinates",
-            "lastMoveArrowVisible": "Show last move arrow"
+            "lastMoveArrowVisible": "Show last move arrow",
+            "playerName": "Player name: ",
+            "computerName": "Computer name: "
         },
         "promotion": {
             "title": "Select the promotion piece"

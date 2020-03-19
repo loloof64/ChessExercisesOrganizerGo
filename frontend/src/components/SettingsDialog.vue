@@ -131,6 +131,22 @@
       <v-color-picker class="mx-6" v-if="isEditingBoardDndCrossColor" 
         v-model="editingBoardDndCrossColorValue"></v-color-picker>
 
+      <v-row class="mx-6 my-2">
+        <v-text-field
+          v-model="tempSettings.PlayerName"
+          :label="$t('modals.settings.playerName')"
+        >
+        </v-text-field>
+      </v-row>
+
+      <v-row class="mx-6 my-2">
+        <v-text-field
+          v-model="tempSettings.ComputerName"
+          :label="$t('modals.settings.computerName')"
+        >
+        </v-text-field>
+      </v-row>
+
     </SimpleModalDialog>
 
     <SimpleModalDialog ref="errorDialog" :title="errorDialogTitle">

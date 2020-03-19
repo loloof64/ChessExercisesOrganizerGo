@@ -47,7 +47,9 @@
             "selectedEngine": "Moteur choisi: ",
             "noEngine": "aucun",
             "coordinatesVisible": "Afficher les coordonnées",
-            "lastMoveArrowVisible": "Afficher la flèche du dernier coup"
+            "lastMoveArrowVisible": "Afficher la flèche du dernier coup",
+            "playerName": "Nom du joueur: ",
+            "computerName": "Nom de l'ordinateur: "
         },
         "promotion": {
             "title": "Veuillez choisir la pièce de promotion"
