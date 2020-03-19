@@ -64,6 +64,7 @@ export default {
       });
 
       this.$emit('configurationUpdated', this.settings);
+      this.closeColorChoosers();
     },
     selectEngine: function() {
       // Production mode : path should be set to the value of
@@ -74,6 +75,7 @@ export default {
     },
     cancel: function() {
       this.tempSettings = this.settings;
+      this.closeColorChoosers();
     },
     open: function(currentSettings) {
         const newSettings = JSON.parse(currentSettings);
@@ -92,6 +94,9 @@ export default {
         this.isEditingBoardBackgroundColor = true;
         this.backgroundColorButtonText = this.$i18n.t('modals.settings.acceptColor');
       }
+    },
+    closeColorChoosers: function() {
+      this.isEditingBoardBackgroundColor = false;
     }
   },
   components: {

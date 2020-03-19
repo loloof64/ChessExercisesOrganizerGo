@@ -18,7 +18,7 @@
         </v-layout>
 
         <SettingsDialog ref="settingsDialog"
-          @configurationUpdated="updateBoardAndEngine($event)"
+          @configurationUpdated="updateBoardAndEngine"
         ></SettingsDialog>
 
         <SimpleModalDialog ref="errorDialog" :title="errorDialogTitle">
@@ -191,7 +191,7 @@
       },
       updateBoardAndEngine: function(configuration) {
         // Update used engine
-        window.backend.UciEngine.LoadEngineWithPathProviden(this.settings.EnginePath).then(error => {
+        window.backend.UciEngine.LoadEngineWithPathProviden(configuration.EnginePath).then(error => {
           if (error === "#ConfigEngineErr") {
             this.errorDialogTitle = this.$i18n.t(
               "modals.settings.failedToSetupEngineTitle"
