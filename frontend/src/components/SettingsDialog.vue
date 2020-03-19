@@ -39,11 +39,12 @@ export default {
       errorDialogText: '',
       isEditingBoardBackgroundColor: false,
       editingBoardBackgroundColorValue: undefined,
-      backgroundColorButtonText: this.$i18n.t('modals.settings.modifyColor'),
+      backgroundColorButtonText: '',
     };
   },
   mounted() {
     this.$i18n.locale = navigator.language.substring(0, 2);
+    this.backgroundColorButtonText = this.$i18n.t('modals.settings.modifyColor')
   },
   methods: {
     update: function() {
