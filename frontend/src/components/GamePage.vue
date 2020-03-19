@@ -18,6 +18,7 @@
           :promotion_dialog_title="$t('modals.promotion.title')"
           :white_player_human="whitePlayerHuman"
           :black_player_human="blackPlayerHuman"
+          
           @checkmate="notifyCheckmate"
           @stalemate="notifyStalemate"
           @perpetual_draw="notifyPerpetualDraw"
@@ -25,6 +26,7 @@
           @fifty_moves_draw="notifyFiftyMovesDraw"
           @waiting_manual_move="makeComputerMove"
           @move_done="addMoveToHistory"
+
           :reversed="boardReversed"
           :background="boardBackground"
           :coordinates_color="coordinates_color"
@@ -34,6 +36,9 @@
           :origin_cell_color="origin_cell_color"
           :target_cell_color="target_cell_color"
           :dnd_cross_color="dnd_cross_color"
+
+          :coordinates_visible="coordinates_visible"
+          :last_move_visible="last_move_visible"
         ></loloof64-chessboard>
       </v-col>
 
@@ -130,6 +135,14 @@ export default {
       required: true,
     },
     dnd_cross_color: {
+      type: String,
+      required: true,
+    },
+    coordinates_visible: {
+      type: String,
+      required: true,
+    },
+    last_move_visible: {
       type: String,
       required: true,
     },

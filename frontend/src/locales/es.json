@@ -45,7 +45,9 @@
             "boardDndEndCellColor": "color del final de arrastrar y soltar del tablero",
             "boardDndSCrossColor": "color de la cruz de arrastrat y soltar del tablero",
             "selectedEngine": "Elegido motor: ",
-            "noEngine": "ninguno"
+            "noEngine": "ninguno",
+            "coordinatesVisible": "Mostrar coordenadas del tablero",
+            "lastMoveArrowVisible": "Mostrar la flecha del utlimo golpe del tablero"
         },
         "promotion": {
             "title": "Elige la pieza de promocion"

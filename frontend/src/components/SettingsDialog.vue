@@ -19,6 +19,14 @@
         <v-btn class="mx-6" @click="selectEngine()">{{$t('modals.settings.configureEngine')}}</v-btn>
       </v-row>
 
+      <v-row class="ml-6 my-2">
+        <v-checkbox v-model="tempSettings.CoordinatesVisible" :label="$t('modals.settings.coordinatesVisible')"></v-checkbox>
+      </v-row>
+
+      <v-row class="ml-6 my-2">
+        <v-checkbox v-model="tempSettings.LastMoveArrowVisible" :label="$t('modals.settings.lastMoveArrowVisible')"></v-checkbox>
+      </v-row>
+
       <!-- Background color -->
       <v-row class="ml-6 my-2">
         <v-btn cols="3" class="mx-6" @click="manageEditingBoardBackgroundColorVisibility()"
@@ -33,7 +41,7 @@
         v-model="editingBoardBackgroundColorValue"></v-color-picker>
 
       <!-- Coordinates color -->
-      <v-row class="ml-6 my-2">
+      <v-row class="ml-6 my-2" v-if="mustShowCoordinatesColorOption">
         <v-btn cols="3" class="mx-6" @click="manageEditingBoardCoordinatesColorVisibility()"
           v-bind:style="{backgroundColor: tempSettings.BoardCoordinatesColor}"
         >{{coordinatesColorButtonText}}</v-btn>
@@ -46,7 +54,7 @@
         v-model="editingBoardCoordinatesColorValue"></v-color-picker>
 
       <!-- Last move arrow color -->
-      <v-row class="ml-6 my-2">
+      <v-row class="ml-6 my-2" v-if="mustShowLastMoveArrowColorOption">
         <v-btn cols="3" class="mx-6" @click="manageEditingBoardLastMoveArrowColorVisibility()"
           v-bind:style="{backgroundColor: tempSettings.BoardLastMoveArrowColor}"
         >{{lastMoveArrowColorButtonText}}</v-btn>
@@ -379,10 +387,18 @@ export default {
   },
   computed: {
     selectedEnginePath: function() {
-      if (!this.tempSettings.EnginePath) return this.$i18n.t('modals.settings.noEngine');
+      if (this.tempSettings.EnginePath === undefined) return this.$i18n.t('modals.settings.noEngine');
       if (this.tempSettings.EnginePath.length === 0) return this.$i18n.t('modals.settings.noEngine');
       return this.tempSettings.EnginePath; 
-    }
+    },
+    mustShowCoordinatesColorOption: function() {
+      if (this.tempSettings.CoordinatesVisible === undefined) return false;
+      return [true, "true"].includes(this.tempSettings.CoordinatesVisible);
+    },
+    mustShowLastMoveArrowColorOption: function() {
+      if (this.tempSettings.LastMoveArrowVisible === undefined) return false;
+      return [true, "true"].includes(this.tempSettings.LastMoveArrowVisible);
+    },
   },
   components: {
     SimpleModalDialog

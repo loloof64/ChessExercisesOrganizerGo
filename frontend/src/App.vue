@@ -21,6 +21,8 @@
             :origin_cell_color="boardDndStartColor"
             :target_cell_color="boardDndEndColor"
             :dnd_cross_color="boardDndCrossColor"
+            :coordinates_visible="boardCoordinatesVisible"
+            :last_move_visible="boardLastMoveArrowVisible"
           ></game-page>
         </v-layout>
 
@@ -89,6 +91,8 @@
       boardDndStartColor: undefined,
       boardDndEndColor: undefined,
       boardDndCrossColor: undefined,
+      boardCoordinatesVisible: undefined,
+      boardLastMoveArrowVisible: undefined,
     }),
     mounted() {
       this.$i18n.locale = navigator.language.substring(0, 2);
@@ -98,7 +102,6 @@
         }
         else {
           const parsedContent = JSON.parse(JSON.parse(content));
-
           this.settings = parsedContent;
           this.updateBoardAndEngine(parsedContent);
         }
@@ -206,6 +209,10 @@
         });
       },
       updateBoardAndEngine: function(configuration) {
+        /////////////////////////////
+        console.log(configuration);
+        /////////////////////////////
+
         // Apply modifications on board.
         this.boardBackgroundColor = configuration.BoardBackgroundColor;
         this.boardCoordintatesColor = configuration.BoardCoordinatesColor;
@@ -215,6 +222,8 @@
         this.boardDndStartColor = configuration.BoardDndStartColor;
         this.boardDndEndColor = configuration.BoardDndEndColor;
         this.boardDndCrossColor = configuration.BoardDndCrossColor;
+        this.boardCoordinatesVisible = [true, "true"].includes(configuration.CoordinatesVisible);
+        this.boardLastMoveArrowVisible = [true, "true"].includes(configuration.LastMoveArrowVisible);
 
         // Update used engine
         window.backend.UciEngine.LoadEngineWithPathProviden(configuration.EnginePath).then(error => {

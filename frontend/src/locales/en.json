@@ -45,7 +45,9 @@
             "boardDndEndCellColor": "board Drag and Drop end cell color",
             "boardDndSCrossColor": "board Drag and Drop end cell color",
             "selectedEngine": "Selected engine: ",
-            "noEngine": "no engine"
+            "noEngine": "no engine",
+            "coordinatesVisible": "Show coordinates",
+            "lastMoveArrowVisible": "Show last move arrow"
         },
         "promotion": {
             "title": "Select the promotion piece"

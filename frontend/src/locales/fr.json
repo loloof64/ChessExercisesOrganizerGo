@@ -45,7 +45,9 @@
             "boardDndEndCellColor": "couleur de fin de 'Drag and Drop' de l'échiquier",
             "boardDndSCrossColor": "couleur de la croix de 'Drag and Drop' de l'échiquier",
             "selectedEngine": "Moteur choisi: ",
-            "noEngine": "aucun"
+            "noEngine": "aucun",
+            "coordinatesVisible": "Afficher les coordonnées",
+            "lastMoveArrowVisible": "Afficher la flèche du dernier coup"
         },
         "promotion": {
             "title": "Veuillez choisir la pièce de promotion"
