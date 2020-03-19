@@ -209,10 +209,6 @@
         });
       },
       updateBoardAndEngine: function(configuration) {
-        /////////////////////////////
-        console.log(configuration);
-        /////////////////////////////
-
         // Apply modifications on board.
         this.boardBackgroundColor = configuration.BoardBackgroundColor;
         this.boardCoordintatesColor = configuration.BoardCoordinatesColor;
