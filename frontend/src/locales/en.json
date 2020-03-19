@@ -43,7 +43,9 @@
             "boardBlackCellsColor": "board black cells color",
             "boardDndStartCellColor": "board Drag and Drop start cell color",
             "boardDndEndCellColor": "board Drag and Drop end cell color",
-            "boardDndSCrossColor": "board Drag and Drop end cell color"
+            "boardDndSCrossColor": "board Drag and Drop end cell color",
+            "selectedEngine": "Selected engine: ",
+            "noEngine": "no engine"
         },
         "promotion": {
             "title": "Select the promotion piece"

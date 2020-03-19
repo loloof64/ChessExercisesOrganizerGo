@@ -12,6 +12,10 @@
       </v-row>
 
       <v-row class="ml-6 my-2">
+          {{$t('modals.settings.selectedEngine')}} {{ selectedEnginePath }}
+      </v-row>
+
+      <v-row class="ml-6 my-2">
         <v-btn class="mx-6" @click="selectEngine()">{{$t('modals.settings.configureEngine')}}</v-btn>
       </v-row>
 
@@ -371,6 +375,13 @@ export default {
       this.isEditingBoardDndStartColor = false;
       this.isEditingBoardDndEndColor = false;
       this.isEditingBoardDndCrossColor = false;
+    },
+  },
+  computed: {
+    selectedEnginePath: function() {
+      if (!this.tempSettings.EnginePath) return this.$i18n.t('modals.settings.noEngine');
+      if (this.tempSettings.EnginePath.length === 0) return this.$i18n.t('modals.settings.noEngine');
+      return this.tempSettings.EnginePath; 
     }
   },
   components: {

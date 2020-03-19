@@ -43,7 +43,9 @@
             "boardBlackCellsColor": "color de las casillas negras del tablero",
             "boardDndStartCellColor": "color del pricipio de arrastrar y soltar del tablero",
             "boardDndEndCellColor": "color del final de arrastrar y soltar del tablero",
-            "boardDndSCrossColor": "color de la cruz de arrastrat y soltar del tablero"
+            "boardDndSCrossColor": "color de la cruz de arrastrat y soltar del tablero",
+            "selectedEngine": "Elegido motor: ",
+            "noEngine": "ninguno"
         },
         "promotion": {
             "title": "Elige la pieza de promocion"

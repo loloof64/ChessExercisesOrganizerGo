@@ -43,7 +43,9 @@
             "boardBlackCellsColor": "couleur des cases noires de l'échiquier",
             "boardDndStartCellColor": "couleur de début de 'Drag and Drop' de l'échiquier",
             "boardDndEndCellColor": "couleur de fin de 'Drag and Drop' de l'échiquier",
-            "boardDndSCrossColor": "couleur de la croix de 'Drag and Drop' de l'échiquier"
+            "boardDndSCrossColor": "couleur de la croix de 'Drag and Drop' de l'échiquier",
+            "selectedEngine": "Moteur choisi: ",
+            "noEngine": "aucun"
         },
         "promotion": {
             "title": "Veuillez choisir la pièce de promotion"
