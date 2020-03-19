@@ -41,6 +41,29 @@ func NewSettings() *SettingsManager {
 	return &SettingsManager{}
 }
 
+// GetDefaultSettings returns the default settings
+// [output] string: the JSON string, or the error if the settings could not
+// be converted into JSON
+func (settings *SettingsManager) GetDefaultSettings() string {
+	defaultSettings := Settings{
+		EnginePath:              "",
+		BoardBackgroundColor:    "#06f",
+		BoardCoordinatesColor:   "#f90",
+		BoardLastMoveArrowColor: "#cde",
+		BoardWhiteCellsColor:    "#fc0",
+		BoardBlackCellsColor:    "#a33",
+		BoardDndStartColor:      "#12FC23",
+		BoardDndEndColor:        "#FC2312",
+		BoardDndCrossColor:      "#898923",
+	}
+
+	result, err := json.Marshal(defaultSettings)
+	if err != nil {
+		return "#ConversionToJsonError"
+	}
+	return string(result)
+}
+
 // Load returns a JSON string of the settings
 // Tries to load from the configuration folder in home directory,
 // or if it fails from the folder of program execution.

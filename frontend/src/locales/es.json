@@ -26,6 +26,9 @@
         },
         "settings": {
             "title": "Configuraciones",
+            "loadDefaults": "Cargar predeterminadas configuraciones",
+            "failedLoadingDefaultSettingsTitle": "Fracasco del cargamento de las predeterminadas configuraciones",
+            "failedLoadingDefaultSettingsText": "Fracasco del cargamento de las predeterminadas configuraciones",
             "modifyColor": "Cambiar",
             "acceptColor": "Acordar",
             "configureEngine": "Elegir el motor UCI",

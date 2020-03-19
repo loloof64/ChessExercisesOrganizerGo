@@ -26,6 +26,9 @@
         },
         "settings": {
             "title": "Paramètres",
+            "loadDefaults": "Charger les paramètres par défaut",
+            "failedLoadingDefaultSettingsTitle": "Echec de chargement des paramètres par défaut",
+            "failedLoadingDefaultSettingsText": "Echec de chargement des paramètres par défaut",
             "modifyColor": "Changer",
             "acceptColor": "Accepter",
             "configureEngine": "Choisir le moteur UCI",

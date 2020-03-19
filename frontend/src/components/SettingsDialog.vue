@@ -7,8 +7,14 @@
       :cancelAction="cancel"
       cancelButton
     >
-      <v-btn class="ml-6 my-2" @click="selectEngine()">{{$t('modals.settings.configureEngine')}}</v-btn>
+      <v-row class="ml-6 my-2">
+        <v-btn class="mx-6" @click="loadDefaultSettings()">{{$t('modals.settings.loadDefaults')}}</v-btn>
+      </v-row>
 
+      <v-row class="ml-6 my-2">
+        <v-btn class="mx-6" @click="selectEngine()">{{$t('modals.settings.configureEngine')}}</v-btn>
+      </v-row>
+      
       <!-- Background color -->
       <v-row class="ml-6 my-2">
         <v-btn cols="3" class="mx-6" @click="manageEditingBoardBackgroundColorVisibility()"
@@ -190,6 +196,22 @@ export default {
         this.settings = newSettings;
         this.tempSettings = newSettings;
         this.$refs['modal'].open();
+    },
+    loadDefaultSettings: function() {
+      window.backend.SettingsManager.GetDefaultSettings().then(result => {
+        if (result === '#ConversionToJsonError') {
+          console.error(result);
+          this.errorDialogTitle = this.$i18n.t('modals.settings.failedLoadingDefaultSettingsTitle');
+          this.errorDialogText = this.$i18n.t('modals.settings.failedLoadingDefaultSettingsText');
+          this.$refs['errorDialog'].open();
+          return;
+        }
+
+        this.tempSettings = JSON.parse(result);
+
+        //////////////////////////////////////
+        console.log(this.tempSettings);
+      });
     },
     manageEditingBoardBackgroundColorVisibility: function() {
       if (this.isEditingBoardBackgroundColor === true) {

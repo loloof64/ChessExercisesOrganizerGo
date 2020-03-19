@@ -26,6 +26,9 @@
         },
         "settings": {
             "title": "Settings",
+            "loadDefaults": "Load default settings",
+            "failedLoadingDefaultSettingsTitle": "Failed to load default settings",
+            "failedLoadingDefaultSettingsText": "Failed to load default settings",
             "modifyColor": "Modify",
             "acceptColor": "Accept",
             "configureEngine": "Select UCI engine",
