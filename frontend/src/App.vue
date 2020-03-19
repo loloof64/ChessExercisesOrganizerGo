@@ -12,10 +12,14 @@
     <v-content>
       <v-container fluid class="px-0">
         <v-layout justify-center align-center class="px-0">
-          <game-page ref="gameZone" @snackbar="showSnackbar"></game-page>
+          <game-page ref="gameZone" @snackbar="showSnackbar"
+            :boardBackground="boardBackgroundColor"
+          ></game-page>
         </v-layout>
 
-        <SettingsDialog ref="settingsDialog"></SettingsDialog>
+        <SettingsDialog ref="settingsDialog"
+          @configurationUpdated="updateBoardAndEngine($event)"
+        ></SettingsDialog>
 
         <SimpleModalDialog ref="errorDialog" :title="errorDialogTitle">
             <v-card-text>{{errorDialogText}}</v-card-text>
@@ -70,6 +74,7 @@
       errorDialogText: '',
       snackBarMessage: '',
       settings: undefined,
+      boardBackgroundColor: '#124589',
     }),
     mounted() {
       this.$i18n.locale = navigator.language.substring(0, 2);
@@ -184,6 +189,23 @@
           }
         });
       },
+      updateBoardAndEngine: function(configuration) {
+        // Update used engine
+        window.backend.UciEngine.LoadEngineWithPathProviden(this.settings.EnginePath).then(error => {
+          if (error === "#ConfigEngineErr") {
+            this.errorDialogTitle = this.$i18n.t(
+              "modals.settings.failedToSetupEngineTitle"
+            );
+            this.errorDialogText = this.$i18n.t(
+              "modals.settings.failedToSetupEngineText"
+            );
+            this.$refs["errorDialog"].open();
+          }
+        });
+
+        // Apply modifications on board.
+        this.boardBackgroundColor = configuration.BoardBackgroundColor;        
+      }
     },
     components: {
       GamePage,

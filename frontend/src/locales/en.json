@@ -30,7 +30,8 @@
             "failedToSetupEngineTitle": "Could not select this engine",
             "failedToSetupEngineText": "Failed to select the engine : have you got the access rights for it ?",
             "failedToSaveTitle": "Failed to save",
-            "failedToSaveText": "Failed to save the settings"
+            "failedToSaveText": "Failed to save the settings",
+            "boardBackgroundColor": "board background color"
         },
         "promotion": {
             "title": "Select the promotion piece"

@@ -30,7 +30,8 @@
             "failedToSetupEngineTitle": "Echec de sélection du moteur",
             "failedToSetupEngineText": "Echec de sélection du moteur : en possedez-vous les droits d'accès ?",
             "failedToSaveTitle": "Echec de sauvegarde",
-            "failedToSaveText": "Echec de sauvegarde des paramètres"
+            "failedToSaveText": "Echec de sauvegarde des paramètres",
+            "boardBackgroundColor": "couleur de fond de l'échiquier"
         },
         "promotion": {
             "title": "Veuillez choisir la pièce de promotion"

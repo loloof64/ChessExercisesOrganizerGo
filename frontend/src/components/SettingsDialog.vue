@@ -7,7 +7,17 @@
       :cancelAction="cancel"
       cancelButton
     >
-      <v-btn class="mx-a" @click="selectEngine()">{{$t('modals.settings.configureEngine')}}</v-btn>
+      <v-btn class="ml-6 my-2" @click="selectEngine()">{{$t('modals.settings.configureEngine')}}</v-btn>
+
+      <v-row class="my-2">
+        <v-btn cols="3" class="mx-6" @click="manageEditingBoardBackgroundColorVisibility()"
+          v-bind:style="{backgroundColor: tempSettings.BoardBackgroundColor}"
+        ></v-btn>
+        <div cols="9" class="mx-6 my-2">{{$t('modals.settings.boardBackgroundColor')}}</div>
+      </v-row>
+      <v-color-picker class="mx-6" v-if="isEditingBoardBackgroundColor" 
+        v-model="editingBoardBackgroundColorValue"></v-color-picker>
+
     </SimpleModalDialog>
 
     <SimpleModalDialog ref="errorDialog" :title="errorDialogTitle">
@@ -27,11 +37,15 @@ export default {
       tempSettings: {},
       errorDialogTitle: '',
       errorDialogText: '',
+      isEditingBoardBackgroundColor: false,
+      editingBoardBackgroundColorValue: undefined,
     };
   },
   methods: {
     update: function() {
       this.settings = this.tempSettings;
+
+      // Save settings into file
       window.backend.SettingsManager.Save(this.settings).then(error => {
         if (error === '#ConversionError' || error === '#FileSavingError') {
           console.error(error);
@@ -45,17 +59,7 @@ export default {
         }
       });
 
-      window.backend.UciEngine.LoadEngineWithPathProviden(this.settings.EnginePath).then(error => {
-        if (error === "#ConfigEngineErr") {
-          this.errorDialogTitle = this.$i18n.t(
-            "modals.settings.failedToSetupEngineTitle"
-          );
-          this.errorDialogText = this.$i18n.t(
-            "modals.settings.failedToSetupEngineText"
-          );
-          this.$refs["errorDialog"].open();
-        }
-      });
+      this.$emit('configurationUpdated', this.settings);
     },
     selectEngine: function() {
       // Production mode : path should be set to the value of
@@ -72,6 +76,16 @@ export default {
         this.settings = newSettings;
         this.tempSettings = newSettings;
         this.$refs['modal'].open();
+    },
+    manageEditingBoardBackgroundColorVisibility: function() {
+      if (this.isEditingBoardBackgroundColor === true) {
+        this.tempSettings.BoardBackgroundColor = this.editingBoardBackgroundColorValue.hex || this.editingBoardBackgroundColorValue;
+        this.isEditingBoardBackgroundColor = false;
+      }
+      else {
+        this.editingBoardBackgroundColorValue = this.tempSettings.BoardBackgroundColor;
+        this.isEditingBoardBackgroundColor = true;
+      }
     }
   },
   components: {

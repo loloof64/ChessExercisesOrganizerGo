@@ -30,7 +30,8 @@
             "failedToSetupEngineTitle": "Fracasco de la seleccion del motor",
             "failedToSetupEngineText": "Fracasco de la seleccion del motor : tienes derechos para el acceso ?",
             "failedToSaveTitle": "Fracasco de la salvaguarda",
-            "failedToSaveText": "Fracasco de la salvaguarda de los parametros"
+            "failedToSaveText": "Fracasco de la salvaguarda de los parametros",
+            "boardBackgroundColor": "color del fondo del tablero"
         },
         "promotion": {
             "title": "Elige la pieza de promocion"

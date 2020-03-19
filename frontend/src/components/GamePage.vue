@@ -25,6 +25,7 @@
           @fifty_moves_draw="notifyFiftyMovesDraw"
           @waiting_manual_move="makeComputerMove"
           @move_done="addMoveToHistory"
+          :background="boardBackground"
         ></loloof64-chessboard>
       </v-col>
 
@@ -91,6 +92,12 @@ import MovesHistory from "./MovesHistory";
     */
 
 export default {
+  props: {
+    boardBackground: {
+      type: String,
+      required: true,
+    }
+  },
   data() {
     return {
       message: " ",
