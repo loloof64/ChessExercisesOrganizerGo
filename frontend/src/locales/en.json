@@ -91,6 +91,13 @@
         "saveClosingError": {
             "title": "Error closing file",
             "text": "Failed to close file"
+        },
+        "noGameInPgn": {
+            "title": "Could not load game",
+            "text": "No game in the selected pgn"
+        },
+        "pgnSelection": {
+            "title": "Select the position"
         }
     },
     "game": {

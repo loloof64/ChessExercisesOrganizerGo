@@ -91,6 +91,13 @@
         "saveClosingError": {
             "title": "Erreur de fermeture du fichier",
             "text": "Erreur de fermeture du fichier"
+        },
+        "noGameInPgn": {
+            "title": "Erreur de chargement des parties",
+            "text": "Aucune partie dans le fichier"
+        },
+        "pgnSelection": {
+            "title": "Choisissez la position"
         }
     },
     "game": {
