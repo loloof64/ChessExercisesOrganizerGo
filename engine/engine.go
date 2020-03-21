@@ -43,7 +43,7 @@ func (engine *UciEngine) PlayPosition(positionFen string) string {
 
 	engine.eng.SetFEN(positionFen)
 	resultOpts := uci.HighestDepthOnly | uci.IncludeUpperbounds | uci.IncludeLowerbounds
-	results, error := engine.eng.GoDepth(16, resultOpts)
+	results, error := engine.eng.GoDepth(20, resultOpts)
 
 	if error != nil {
 		return "#ComputationError"

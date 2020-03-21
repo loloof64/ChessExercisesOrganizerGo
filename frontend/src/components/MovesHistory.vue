@@ -1,6 +1,6 @@
 <template>
   <v-container class="white indigo--text" id="root" width="400" height="600">
-    <v-row class="mx-2">
+    <v-row class="mx-2" id="controlsRow">
         <v-col v-for="btn in buttons" :key="btn.tooltipTrKey" cols="3">
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
@@ -159,6 +159,12 @@ export default {
     },
     confirmPositionSet: function(evt) {
       this.selectedPosition = evt;
+      this.adjustScroll();
+    },
+    adjustScroll: function() {
+      let lineIndex = this.selectedPosition.historyIndex;
+      const rootElement = document.querySelector('#root');
+      rootElement.scroll(0, lineIndex * 60);
     },
     isSelectedPosition: function(index, whitePlayer) {
       if (this.selectedPosition === undefined) return false;
@@ -192,6 +198,8 @@ export default {
 #root {
   color: black;
   display: inline-block;
+  height: 600px;
+  overflow-y: scroll;
 }
 
 .col[move] {
@@ -203,5 +211,10 @@ export default {
 .highlight {
   background-color: aqua;
   color: brown;
+}
+
+#controlsRow {
+  position: fixed;
+  left: 720px;
 }
 </style>
