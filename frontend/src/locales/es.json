@@ -49,7 +49,8 @@
             "coordinatesVisible": "Mostrar coordenadas del tablero",
             "lastMoveArrowVisible": "Mostrar la flecha del utlimo golpe del tablero",
             "playerName": "Nombre del jugador: ",
-            "computerName": "Nombre del ordenador: "
+            "computerName": "Nombre del ordenador: ",
+            "engineDepth": "Profundidad del motor"
         },
         "promotion": {
             "title": "Elige la pieza de promocion"

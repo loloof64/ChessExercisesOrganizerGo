@@ -35,10 +35,14 @@
             :dnd_cross_color="boardDndCrossColor"
             :coordinates_visible="boardCoordinatesVisible"
             :last_move_visible="boardLastMoveArrowVisible"
+            :engineDepth="engineDepth"
           ></game-page>
         </v-layout>
 
-        <SettingsDialog ref="settingsDialog" @configurationUpdated="updateBoardAndEngine"></SettingsDialog>
+        <SettingsDialog ref="settingsDialog" 
+          @configurationUpdated="updateBoardAndEngine"
+          @engineDepthUpdated="setEngineDepth"
+        ></SettingsDialog>
 
         <SimpleModalDialog ref="errorDialog" :title="errorDialogTitle">
           <v-card-text>{{errorDialogText}}</v-card-text>
@@ -165,6 +169,7 @@ export default {
     selectedPgnBlack: '',
     selectedPgnSite: '',
     selectedPgnDate: '',
+    engineDepth: 10,
   }),
   mounted() {
     this.$i18n.locale = navigator.language.substring(0, 2);
@@ -177,6 +182,7 @@ export default {
           parsedContent = JSON.parse(parsedContent);
         this.settings = parsedContent;
         this.updateBoardAndEngine(parsedContent);
+        this.setEngineDepth(parsedContent.EngineDepth);
       }
     });
   },
@@ -424,6 +430,9 @@ export default {
         this.selectedPgnIndex += 1;
         this.previewPgn();
       }
+    },
+    setEngineDepth: function(depth) {
+      this.engineDepth = depth;
     }
   },
   computed: {

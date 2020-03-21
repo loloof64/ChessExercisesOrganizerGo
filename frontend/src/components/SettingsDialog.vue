@@ -132,6 +132,26 @@
         v-model="editingBoardDndCrossColorValue"></v-color-picker>
 
       <v-row class="mx-6 my-2">
+        <v-slider
+          v-model="tempSettings.EngineDepth"
+          min="0"
+          max="30"
+          :label="$t('modals.settings.engineDepth')"
+        >
+          <template v-slot:append>
+              <v-text-field
+                v-model="tempSettings.EngineDepth"
+                class="mt-0 pt-0"
+                hide-details
+                single-line
+                type="number"
+                style="width: 60px"
+              ></v-text-field>
+            </template>
+        </v-slider>
+      </v-row>
+
+      <v-row class="mx-6 my-2">
         <v-text-field
           v-model="tempSettings.PlayerName"
           :label="$t('modals.settings.playerName')"
@@ -215,6 +235,8 @@ export default {
     update: function() {
       this.settings = this.tempSettings;
 
+      this.$emit('engineDepthUpdated', this.settings.EngineDepth);
+
       // Save settings into file
       window.backend.SettingsManager.Save(this.settings).then(error => {
         if (error === '#ConversionError' || error === '#FileSavingError') {
@@ -234,12 +256,10 @@ export default {
     },
     selectEngine: function() {
       // Production mode : path should be set to the value of
-      // window.backend.UciEngine.GetUserEnginePath promise
-      window.backend.UciEngine.GetUserEnginePath().then(path => {
-        if (path.length > 0) {
-          this.tempSettings.EnginePath = path;
-        }
-      });
+      // window.backend.UciEngine.GetUserEnginePath promise instead
+      const path =
+        "/home/laurent-bernabe/Programmes/Echecs/stockfish-11-linux/stockfish-11-linux/Linux/stockfish_20011801_x64_modern";
+      this.tempSettings.EnginePath = path;
     },
     cancel: function() {
       this.tempSettings = this.settings;

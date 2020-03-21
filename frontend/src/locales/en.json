@@ -49,7 +49,8 @@
             "coordinatesVisible": "Show coordinates",
             "lastMoveArrowVisible": "Show last move arrow",
             "playerName": "Player name: ",
-            "computerName": "Computer name: "
+            "computerName": "Computer name: ",
+            "engineDepth": "Engine depth"
         },
         "promotion": {
             "title": "Select the promotion piece"

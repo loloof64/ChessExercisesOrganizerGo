@@ -49,7 +49,8 @@
             "coordinatesVisible": "Afficher les coordonnées",
             "lastMoveArrowVisible": "Afficher la flèche du dernier coup",
             "playerName": "Nom du joueur: ",
-            "computerName": "Nom de l'ordinateur: "
+            "computerName": "Nom de l'ordinateur: ",
+            "engineDepth": "Profondeur du moteur"
         },
         "promotion": {
             "title": "Veuillez choisir la pièce de promotion"

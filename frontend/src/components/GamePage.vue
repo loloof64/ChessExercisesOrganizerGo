@@ -148,6 +148,10 @@ export default {
       type: String,
       required: true,
     },
+    engineDepth: {
+      type: Number,
+      required: true,
+    }
   },
   data() {
     return {
@@ -214,7 +218,7 @@ export default {
     makeComputerMove: function() {
       const board = document.querySelector("loloof64-chessboard");
       const currentPosition = board.getCurrentPosition();
-      window.backend.UciEngine.PlayPosition(currentPosition).then(bestMove => {
+      window.backend.UciEngine.PlayPosition(currentPosition, this.engineDepth).then(bestMove => {
         if (bestMove === "#EngineNotSet") {
           this.errorDialogTitle = this.$i18n.t(
             "modals.engineCouldNotPlay.engineNotSet.title"

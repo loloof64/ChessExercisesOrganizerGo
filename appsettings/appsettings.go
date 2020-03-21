@@ -31,6 +31,7 @@ type Settings struct {
 	LastMoveArrowVisible    bool
 	PlayerName              string
 	ComputerName            string
+	EngineDepth             int
 }
 
 // WailsInit initialize the structure for Wails
@@ -63,6 +64,7 @@ func (settings *SettingsManager) GetDefaultSettings() string {
 		LastMoveArrowVisible:    true,
 		PlayerName:              "",
 		ComputerName:            "",
+		EngineDepth:             10,
 	}
 
 	result, err := json.Marshal(defaultSettings)
@@ -95,6 +97,7 @@ func (settings *SettingsManager) Load() string {
 		LastMoveArrowVisible:    true,
 		PlayerName:              "",
 		ComputerName:            "",
+		EngineDepth:             10,
 	}
 
 	dir, err := settings.Runtime.FileSystem.HomeDir()

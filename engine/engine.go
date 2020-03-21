@@ -36,14 +36,14 @@ func (engine *UciEngine) GetUserEnginePath() string {
 // otherwise the error code:
 // #EngineNotSet: not engine configured
 // #ComputationError: either the given position is illegal or a misc. computation error occurred
-func (engine *UciEngine) PlayPosition(positionFen string) string {
+func (engine *UciEngine) PlayPosition(positionFen string, depth int) string {
 	if engine.eng == nil {
 		return "#EngineNotSet"
 	}
 
 	engine.eng.SetFEN(positionFen)
 	resultOpts := uci.HighestDepthOnly | uci.IncludeUpperbounds | uci.IncludeLowerbounds
-	results, error := engine.eng.GoDepth(20, resultOpts)
+	results, error := engine.eng.GoDepth(depth, resultOpts)
 
 	if error != nil {
 		return "#ComputationError"
