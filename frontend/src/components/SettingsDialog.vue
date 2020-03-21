@@ -234,10 +234,12 @@ export default {
     },
     selectEngine: function() {
       // Production mode : path should be set to the value of
-      // window.backend.UciEngine.GetUserEnginePath promise instead
-      const path =
-        "/home/laurent-bernabe/Programmes/Echecs/stockfish-11-linux/stockfish-11-linux/Linux/stockfish_20011801_x64_modern";
-      this.tempSettings.EnginePath = path;
+      // window.backend.UciEngine.GetUserEnginePath promise
+      window.backend.UciEngine.GetUserEnginePath().then(path => {
+        if (path.length > 0) {
+          this.tempSettings.EnginePath = path;
+        }
+      });
     },
     cancel: function() {
       this.tempSettings = this.settings;

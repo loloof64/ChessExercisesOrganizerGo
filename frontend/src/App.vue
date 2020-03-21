@@ -190,12 +190,8 @@ export default {
       }
     },
     doStartNewGame: function() {
-      const fileName = "lesson01";
-      const filePath =
-        "/home/laurent-bernabe/Documents/temp/pgn/" + fileName + ".pgn";
-      window.backend.TextFileManager.GetTextFileContentWithPathProviden(
-        filePath
-      ).then(content => {
+      //window.backend.TextFileManager.GetTextFileContent().then(content => {
+      window.backend.TextFileManager.GetTextFileContentWithPathProviden('/home/laurent-bernabe/Documents/temp/pgn/lesson01.pgn').then(content => {
         if (content === "#ErrorReadingFile") {
           this.errorDialogTitle = this.$i18n.t("modals.failedToReadPgn.title");
           this.errorDialogText = this.$i18n.t("modals.failedToReadPgn.text");
@@ -253,13 +249,9 @@ export default {
         ? this.settings.ComputerName
         : this.settings.PlayerName;
       const pgn = chessBoard.gamePgn({ whiteName, blackName });
-      const fileName = "PgnGenere";
-      const filePath =
-        "/home/laurent-bernabe/Documents/temp/pgn/" + fileName + ".pgn";
 
       // Production mode, use window.backend.TextFileManager.SaveTextFile()
-      window.backend.TextFileManager.SaveTextFileWithPathProviden(
-        filePath,
+      window.backend.TextFileManager.SaveTextFile(
         pgn
       ).then(error => {
         if (error === "#ErrorSavingFile") {

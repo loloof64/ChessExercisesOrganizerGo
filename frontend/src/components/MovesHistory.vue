@@ -216,5 +216,6 @@ export default {
 #controlsRow {
   position: fixed;
   left: 720px;
+  top: 60px;
 }
 </style>
