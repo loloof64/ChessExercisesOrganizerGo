@@ -130,5 +130,13 @@
             "next": "Siguiente posicion",
             "last": "Ultima posicion"
         }
+    },
+    "pgn": {
+        "buttons": {
+            "first": "Primera parte",
+            "previous": "Precedente parte",
+            "next": "Siguiente parte",
+            "last": "Ultima parte"
+        }
     }
 }

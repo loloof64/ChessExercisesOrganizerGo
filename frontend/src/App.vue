@@ -68,6 +68,7 @@
 
         <SimpleModalDialog
           ref="pgnSelectionDialog"
+          id="pgnSelectionDialog"
           :title="$t('modals.pgnSelection.title')"
           :confirmAction="loadSelectedPgn"
           cancelButton
@@ -78,14 +79,47 @@
             :white_player_human="false"
             :black_player_human="false"
 
+            :left="10"
+            :top="10"
+
             :reversed="previewBoardReversed"
-            :background="boardBackground"
+            :background="boardBackgroundColor"
             :coordinates_color="coordinates_color"
             :white_cell_color="white_cell_color"
             :black_cell_color="black_cell_color"
 
             :coordinates_visible="true"
           ></loloof64-chessboard>
+
+          <div id="previewPanel">
+            <div id="previewControls">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                    <v-btn v-on="on" @click="goPreviousPreview()" class="blue red--text"><v-icon>mdi-chevron-left</v-icon></v-btn>
+                </template>
+                <span>{{ $t('pgn.buttons.previous') }}</span>
+              </v-tooltip>
+
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                    <v-btn v-on="on" @click="goNextPreview()" class="blue red--text"><v-icon>mdi-chevron-right</v-icon></v-btn>
+                </template>
+                <span>{{ $t('pgn.buttons.next') }}</span>
+              </v-tooltip>
+
+              <span>
+                {{selectedPgnIndex + 1}} / {{pgnArrays.length}}
+              </span>
+            </div>
+
+            <div id="previewPlayers">
+              {{ previewPgnWhitePlayer }} | {{ previewPgnBlackPlayer }}
+            </div>
+
+            <div id="previewEvent">
+              {{ selectedPgnSite }} {{ previewPgnDate }}
+            </div>
+          </div>
         </SimpleModalDialog>
 
         <SimpleSnackBar ref="snackbar">{{ snackBarMessage }}</SimpleSnackBar>
@@ -127,6 +161,10 @@ export default {
     previewBoardReversed: false,
     pgnArrays: [],
     selectedPgnIndex: -1,
+    selectedPgnWhite: '',
+    selectedPgnBlack: '',
+    selectedPgnSite: '',
+    selectedPgnDate: '',
   }),
   mounted() {
     this.$i18n.locale = navigator.language.substring(0, 2);
@@ -152,7 +190,7 @@ export default {
       }
     },
     doStartNewGame: function() {
-      const fileName = "Bacrot";
+      const fileName = "lesson01";
       const filePath =
         "/home/laurent-bernabe/Documents/temp/pgn/" + fileName + ".pgn";
       window.backend.TextFileManager.GetTextFileContentWithPathProviden(
@@ -339,16 +377,21 @@ export default {
       this.selectedPgnIndex = 0;
       this.$refs['pgnSelectionDialog'].open();
       setTimeout(() => {
-        this.previewPgn(this.selectedPgnIndex);
+        this.previewPgn();
       }, 80);
     },
-    previewPgn: function(index) {
-      if (index > this.pgnArrays.length) return;
+    previewPgn: function() {
+      if (this.selectedPgnIndex > this.pgnArrays.length) return;
 
       const selectedPgn = this.pgnArrays[this.selectedPgnIndex];
       const loader = new pgnReader({pgn: selectedPgn});
       const result = loader.load_pgn();
       const finalPosition = result.finalPosition;
+
+      this.selectedPgnWhite = result.headers.White || '';
+      this.selectedPgnBlack = result.headers.Black || '';
+      this.selectedPgnSite = result.headers.Site || '';
+      this.selectedPgnDate = result.headers.Date || '';
 
       const previewComponent = this.$refs['previewBoard'];
       previewComponent.newGame(finalPosition);
@@ -377,6 +420,29 @@ export default {
           this.errorDialogText = this.$i18n.t("modals.failedToReadPgn.text");
           this.$refs["errorDialog"].open();
         }
+    },
+    goPreviousPreview: function() {
+      if (this.selectedPgnIndex > 0) {
+        this.selectedPgnIndex -= 1;
+        this.previewPgn();
+      }
+    },
+    goNextPreview: function() {
+      if (this.selectedPgnIndex < this.pgnArrays.length - 1) {
+        this.selectedPgnIndex += 1;
+        this.previewPgn();
+      }
+    }
+  },
+  computed: {
+    previewPgnWhitePlayer: function() {
+      return this.selectedPgnWhite.length > 0 ? this.selectedPgnWhite : '???';
+    },
+    previewPgnBlackPlayer: function() {
+      return this.selectedPgnBlack.length > 0 ? this.selectedPgnBlack : '???';
+    },
+    previewPgnDate: function() {
+      return this.selectedPgnDate.length > 0 ? "(" + this.selectedPgnDate + ")" : '';
     }
   },
   components: {
@@ -391,3 +457,35 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+#pgnSelectionDialog {
+  position: relative;
+}
+
+#previewBoard {
+  position: absolute;
+  left: 10px;
+}
+
+#previewPanel {
+  position: absolute;
+  left: 350px;
+  top: 60px;
+}
+
+#previewControls > .v-btn {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#previewPlayers {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+#previewEvent {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+</style>

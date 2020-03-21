@@ -19,6 +19,8 @@
           :white_player_human="whitePlayerHuman"
           :black_player_human="blackPlayerHuman"
           
+          :left="10"
+          
           @checkmate="notifyCheckmate"
           @stalemate="notifyStalemate"
           @perpetual_draw="notifyPerpetualDraw"

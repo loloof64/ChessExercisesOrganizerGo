@@ -130,5 +130,13 @@
             "next": "Next position",
             "last": "Last position"
         }
+    },
+    "pgn": {
+        "buttons": {
+            "first": "First game",
+            "previous": "Previous game",
+            "next": "Next game",
+            "last": "Last game"
+        }
     }
 }
