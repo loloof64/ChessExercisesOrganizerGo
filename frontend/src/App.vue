@@ -196,8 +196,8 @@ export default {
       }
     },
     doStartNewGame: function() {
-      //window.backend.TextFileManager.GetTextFileContent().then(content => {
-      window.backend.TextFileManager.GetTextFileContentWithPathProviden('/home/laurent-bernabe/Documents/temp/pgn/lesson01.pgn').then(content => {
+      // Production mode, use window.backend.TextFileManager.GetTextFileContent()
+      window.backend.TextFileManager.GetTextFileContent().then(content => {
         if (content === "#ErrorReadingFile") {
           this.errorDialogTitle = this.$i18n.t("modals.failedToReadPgn.title");
           this.errorDialogText = this.$i18n.t("modals.failedToReadPgn.text");
@@ -390,6 +390,9 @@ export default {
       this.selectedPgnBlack = result.headers.Black || '';
       this.selectedPgnSite = result.headers.Site || '';
       this.selectedPgnDate = result.headers.Date || '';
+
+      const playerHasBlack = finalPosition.split(' ')[1] !== 'w';
+      this.previewBoardReversed = playerHasBlack;
 
       const previewComponent = this.$refs['previewBoard'];
       previewComponent.newGame(finalPosition);

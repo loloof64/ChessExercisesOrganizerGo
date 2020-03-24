@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import ToolbarButton from './ToolbarButton';
 export default {
   name: 'MovesHistory',
   props: {
@@ -189,7 +188,6 @@ export default {
     }
   },
   components: {
-    ToolbarButton,
   }
 };
 </script>
